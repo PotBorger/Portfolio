@@ -30,7 +30,7 @@ nav {
 }
 
 nav .logo a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Pixelify Sans", serif;
   font-size: 1.5em;
   color: #e0e0e0;
   text-decoration: none;
@@ -54,7 +54,7 @@ nav .nav-links a {
 }
 
 nav .nav-links a:hover {
-  color: #66b2ff;
+  color: #10dd5e;
 }
 
 /* Hamburger Menu */
@@ -96,7 +96,7 @@ header {
 }
 
 .parallax-bg {
-  background-image: url('images/header-bg.jpg');
+  background-image: url('images/bg2.png');
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -115,7 +115,7 @@ header {
 }
 
 .header-content h1 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Press Start 2P", system-ui;
   font-size: 3.5em;
   margin-bottom: 20px;
   opacity: 0;
@@ -134,7 +134,7 @@ header {
 .header-content .btn {
   display: inline-block;
   padding: 12px 30px;
-  background-color: #66b2ff;
+  background-color: #06f67a;
   color: #121212;
   text-decoration: none;
   font-size: 1em;
@@ -146,7 +146,7 @@ header {
 }
 
 .header-content .btn:hover {
-  background-color: #3399ff;
+  background-color: #06f67a;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(102, 178, 255, 0.4);
 }
@@ -167,7 +167,7 @@ section {
 section h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.5em;
-  color: #66b2ff;
+  color: #06f67a;
   text-align: center;
   margin-bottom: 40px;
   position: relative;
@@ -178,7 +178,7 @@ section h2::after {
   display: block;
   width: 80px;
   height: 3px;
-  background: #66b2ff;
+  background: #06f67a;
   margin: 20px auto 0;
 }
 
@@ -187,6 +187,35 @@ section p {
   margin: 0 auto;
   text-align: center;
   font-size: 1.1em;
+}
+
+.card:hover {
+  color: rgb(255, 255, 255);
+  transition: color 1s;
+  
+} 
+ .card:hover:before,
+.card:hover:after {
+  animation: none;
+  opacity: 0;
+}
+
+.card::before {
+  content: "";
+  width: 104%;
+  height: 102%;
+  border-radius: 8px;
+  background-image: linear-gradient(
+    var(--rotate),
+    #91ee92,
+    #1DB954 43%,
+    #13492a
+  );
+  position: absolute;
+  z-index: -1;
+  top: -1%;
+  left: -2%;
+  animation: spin 2.5s linear infinite;
 }
 
 /* Projects Section */
@@ -208,13 +237,13 @@ section p {
 }
 
 .project-item:hover {
-  box-shadow: 0 0 15px rgba(102, 178, 255, 0.6);
-  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(3, 133, 27, 0.6);
+  transform: translateY(-15px);
 }
 
 .project-item h3 {
   font-size: 1.5em;
-  color: #66b2ff;
+  color: #10dd5e;
   margin-bottom: 15px;
 }
 
@@ -251,13 +280,13 @@ section p {
   color: #e0e0e0;
   position: absolute;
   top: 15px;
-  right: 25px;
+  right: 30px;
   font-size: 28px;
   cursor: pointer;
 }
 
 .close-button:hover {
-  color: #66b2ff;
+  color: #f83918;
 }
 
 /* Skills Section */
@@ -281,7 +310,7 @@ section p {
   font-weight: 900;
   position: absolute;
   left: 0;
-  color: #66b2ff;
+  color: white;
 }
 
 /* Contact Section */
@@ -293,7 +322,7 @@ section p {
 }
 
 #contact a {
-  color: #66b2ff;
+  color: #10dd5e;
   text-decoration: none;
 }
 
@@ -302,6 +331,7 @@ section p {
 }
 
 .social-media {
+  color:white;
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -315,7 +345,7 @@ section p {
 }
 
 .social-media a:hover {
-  color: #66b2ff;
+  color: #10dd5e;
 }
 
 /* Footer Styles */
