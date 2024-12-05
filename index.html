@@ -45,7 +45,7 @@
     <div class="parallax-bg"></div>
     <div class="header-content">
       <h1>Hello, I'm Nolan</h1>
-      <p>Computer Science Student & Aspiring Software Developer</p>
+      <p>Computer Science Student & Future Software Engineer</p>
       <a href="#contact" class="btn">Get in Touch</a>
     </div>
   </header>
@@ -55,7 +55,12 @@
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
-      <p>I'm nolan fr</p>
+      <p>I'm Nolan Mai, a passionate problem solver and a software developer who enjoys
+        building stuff that makes life more interactive and engaging. 
+        My work spans web development, database design, and interactive applications, 
+        blending technical precision with user-focused design. Outside of coding, 
+        you will usally find me in the gym, brainstorming new app ideas, or working on a random project. 
+        Let’s create something awesome together! 🚀</p>
     </section>
 
     <!-- Projects Section -->
@@ -66,6 +71,11 @@
         <div class="project-item" data-modal="modal1">
           <h3>TreeTableApp</h3>
           <p>TreeTableApp is a terminal-based tool for rendering hierarchical JSON data.</p>
+        </div>
+        <div class="project-item" data-modal="modal2">
+          <h3>Snake Client and Score Server</h3>  
+          <p>A multiplayer Snake game client with real-time gameplay and a web-based score 
+            server using C#, Blazor, and SQL Server.</p>  
         </div>
         <!-- Repeat project items as needed -->
       </div>
@@ -83,19 +93,43 @@
           <!-- Optional: Include images or links -->
         </div>
       </div>
+      <div id="modal2" class="modal">
+        <div class="modal-content">
+          <h2>Snake Client and Score Server</h2>
+          <span class="close-button">&times;</span>
+          <p>Developed a multiplayer Snake game client and web-based 
+            score server using C#, Blazor, and SQL Server. Designed a 
+            responsive GUI for real-time gameplay, integrated a database 
+            to store and retrieve game sessions and player statistics, and 
+            built a web server to dynamically display game data through HTML pages. 
+            This project utilizes my full-stack development skills and introduces me to
+             real-time application management.</br> 
+             <a style="color:greenyellow" href = "https://github.com/PotBorger/Independent-Study-SCI">Link to repo</a>
+            </p>
+          <!-- Optional: Include images or links -->
+        </div>
+      </div>
       <!-- Repeat modals for each project -->
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>Programming Languages: Python, Java, C#</li>
-        <li>Web Development: HTML, CSS, JavaScript, Svelte, ReactJS</li>
-        <li>Database Management: SQL, MongoDB, PostgreSQL</li>
-        <!-- Add more skills -->
+<!-- Skills Section -->
+<section id="skills">
+  <h2>Skills</h2>
+  <ul class="skills-list">
+    <li>Programming Languages: Python, Java, C#</li>
+    <li>Web Development: HTML, CSS, JavaScript, Svelte, ReactJS, Blazor</li>
+    <li>Database Management: SQL, MongoDB, PostgreSQL</li>
+    <!-- The "card" div triggers the resume modal -->
+    <div class="card" style="cursor:pointer;">
+      <a href="files/NOLAN MAI Resume.pdf" target="_blank" style="color:inherit; text-decoration:none;">
+        My resume
+      </a>
+    </div>
       </ul>
-    </section>
+
+</section>
+
 
 
     <!-- Contact Section -->

@@ -7,10 +7,13 @@ menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('active');
 });
 
-// Modal Functionality
+// Modal Functionality for Projects
 const projectItems = document.querySelectorAll('.project-item');
 const modals = document.querySelectorAll('.modal');
 const closeButtons = document.querySelectorAll('.close-button');
+
+// Resume Card and Modal
+const resumeCard = document.querySelector('.card');
 
 projectItems.forEach(item => {
   item.addEventListener('click', () => {
@@ -25,9 +28,11 @@ closeButtons.forEach(btn => {
   });
 });
 
+
+
 window.onclick = function(event) {
   modals.forEach(modal => {
-    if (event.target == modal) {
+    if (event.target === modal) {
       modal.style.display = 'none';
     }
   });
@@ -35,13 +40,11 @@ window.onclick = function(event) {
 
 // Smooth Scrolling
 const navLinksSmooth = document.querySelectorAll('nav ul li a');
-
 navLinksSmooth.forEach(link => {
   link.addEventListener('click', function(e) {
     if (this.hash !== '') {
       e.preventDefault();
       const hash = this.hash;
-
       document.querySelector(hash).scrollIntoView({
         behavior: 'smooth'
       });
