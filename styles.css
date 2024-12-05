@@ -214,7 +214,6 @@ section p {
   color: rgb(255, 255, 255);
   transition: color 1s;
   cursor: pointer;
-  
 } 
  .card:hover:before,
 .card:hover:after {
@@ -284,15 +283,17 @@ section p {
 /* Projects Section */
 .projects-container {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .project-item {
   background-color: #1e1e1e;
   border: 1px solid #333;
   border-radius: 5px;
-  width: 300px;
+  width: 350px;
   margin: 15px;
   padding: 20px;
   transition: box-shadow 0.3s, transform 0.3s;
