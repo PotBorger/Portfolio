@@ -135,7 +135,6 @@ header {
 }
 
 .header-content .btn {
-  display: inline-block;
   padding: 12px 30px;
   background-color: #06f67a;
   color: #121212;
