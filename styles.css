@@ -132,6 +132,8 @@ header {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1s forwards;
+  display: grid;
+  align-items: center;
 }
 
 .header-content .btn {
