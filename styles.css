@@ -347,8 +347,8 @@ section p {
 .close-button {
   color: #e0e0e0;
   position: absolute;
-  top: 15px;
-  right: 30px;
+  top: -7px;
+  right: 10px;
   font-size: 28px;
   cursor: pointer;
 }
