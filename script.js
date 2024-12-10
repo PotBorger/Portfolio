@@ -2,6 +2,20 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
+// For hidden elements
+const observer = new IntersectionObserver((entries) =>{
+  entries.forEach((entry) =>{
+    console.log(entry);
+    if (entry.isIntersecting){
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+});
+
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((element) => observer.observe(element));
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-active');
   menuToggle.classList.toggle('active');
