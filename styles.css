@@ -100,7 +100,6 @@ header {
 
 .parallax-bg {
   background-image: url('images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg');
-  background-attachment: fixed;
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -111,7 +110,13 @@ header {
   z-index: -1;
   filter: brightness(0.4);
   background-repeat: no-repeat;
-  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  /* On smaller screens, remove fixed attachment for better performance and scaling */
+  .parallax-bg {
+    background-attachment: scroll;
+  }
 }
 
 .header-content {
@@ -149,12 +154,32 @@ header {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1.2s forwards;
+  white-space: nowrap;
 }
 
-.header-content .btn:hover {
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px; /* space between buttons */
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  text-decoration: none;
+  background-color: #06f67a;
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap;
+
+}
+
+
+.btn:hover {
   background-color: #06f67a;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(102, 178, 255, 0.4);
+  box-shadow: 0 4px 6px rgba(15, 234, 7, 0.4);
 }
 
 /* Main Content Styles */
