@@ -548,3 +548,16 @@ footer p {
   filter: blur(0);
   transform: translateX(0);
 }
+
+.snake-game-img-container{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap:20px;
+  justify-content: center;
+}
+
+.snake-game-img{
+  width: 30%;
+}
+
