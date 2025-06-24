@@ -4,7 +4,7 @@ Welcome to my personal portfolio website! This site showcases my projects, skill
 
 ---
 
-## Link to the product: https://nolan-mai.is-a.dev/
+## It's LIVE at: https://nolan-mai.is-a.dev/
 
 ---
 
