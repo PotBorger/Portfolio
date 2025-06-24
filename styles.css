@@ -110,7 +110,6 @@ header {
 }
 
 @media (max-width: 768px) {
-  /* On smaller screens, remove fixed attachment for better performance and scaling */
   .parallax-bg {
     background-attachment: scroll;
   }
