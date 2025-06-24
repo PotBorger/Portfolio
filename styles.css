@@ -649,3 +649,11 @@ footer p {
 .snake-game-img {
   width: 30%;
 }
+
+@media (max-width: 768px) {
+  .project-item.hidden {
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+  }
+}
