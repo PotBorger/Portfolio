@@ -1,6 +1,3 @@
-/* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap');
-
 /* Global Styles */
 html {
   scroll-behavior: smooth;
@@ -12,7 +9,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #e0e0e0;
   line-height: 1.6;
   background-color: #121212;
@@ -29,7 +26,7 @@ nav {
   top: 0;
   background-color: #1e1e1e;
   z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 nav .logo a {
@@ -99,7 +96,7 @@ header {
 }
 
 .parallax-bg {
-  background-image: url('images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg');
+  background-image: url("images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg");
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -155,6 +152,7 @@ header {
   transform: translateY(20px);
   animation: fadeInUp 1.2s forwards;
   white-space: nowrap;
+  margin: 5px;
 }
 
 .button-container {
@@ -172,9 +170,7 @@ header {
   border-radius: 5px;
   text-align: center;
   white-space: nowrap;
-
 }
-
 
 .btn:hover {
   background-color: #06f67a;
@@ -196,7 +192,7 @@ section {
 }
 
 section h2 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.5em;
   color: #06f67a;
   text-align: center;
@@ -205,7 +201,7 @@ section h2 {
 }
 
 section h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 80px;
   height: 3px;
@@ -218,6 +214,63 @@ section p {
   margin: 0 auto;
   text-align: center;
   font-size: 1.1em;
+}
+
+/* Experience Section */
+.experience-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.experience-item {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 25px;
+  position: relative;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.experience-item:hover {
+  box-shadow: 0 0 20px rgba(3, 133, 27, 0.6);
+  transform: translateY(-5px);
+}
+
+.experience-item h3 {
+  font-size: 1.4em;
+  color: #10dd5e;
+  margin-bottom: 5px;
+}
+
+.experience-item .company {
+  font-size: 1.2em;
+  color: #06f67a;
+  margin-bottom: 5px;
+}
+
+.experience-item .date-location {
+  font-size: 1em;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.experience-item ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.experience-item ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.experience-item ul li::before {
+  content: "▶";
+  color: #10dd5e;
+  position: absolute;
+  left: 0;
 }
 
 .card {
@@ -242,8 +295,8 @@ section p {
   color: rgb(255, 255, 255);
   transition: color 1s;
   cursor: pointer;
-} 
- .card:hover:before,
+}
+.card:hover:before,
 .card:hover:after {
   animation: none;
   opacity: 0;
@@ -251,14 +304,14 @@ section p {
 
 .card::before {
   content: "Hover on me!";
-  color: white;  
+  color: white;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   background-image: linear-gradient(
     var(--rotate),
     #91ee92,
-    #1DB954 43%,
+    #1db954 43%,
     #13492a
   );
   position: absolute;
@@ -270,7 +323,7 @@ section p {
 
 .card::after {
   content: "Hover on me!";
-  color: white;  
+  color: white;
   border: none;
   position: absolute;
   top: calc(var(--card-height) / 6);
@@ -285,7 +338,7 @@ section p {
   background-image: linear-gradient(
     var(--rotate),
     #91ee92,
-    #1DB954 43%,
+    #1db954 43%,
     #13492a
   );
   opacity: 0;
@@ -310,22 +363,23 @@ section p {
 
 /* Projects Section */
 .projects-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .project-item {
   background-color: #1e1e1e;
   border: 1px solid #333;
-  border-radius: 5px;
-  width: 350px;
-  margin: 15px;
-  padding: 20px;
+  border-radius: 10px;
+  padding: 25px;
   transition: box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
+  height: 100%;
 }
 
 .project-item:hover {
@@ -342,6 +396,14 @@ section p {
 .project-item p {
   font-size: 1em;
   color: #e0e0e0;
+  line-height: 1.5;
+}
+
+.project-tech {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #06f67a;
+  font-weight: bold;
 }
 
 /* Modal Styles */
@@ -354,26 +416,51 @@ section p {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
   background-color: #1e1e1e;
   margin: 5% auto;
-  /* padding: 20px; */
-  width: 100%;
-  height:100%;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
   position: relative;
-  border-radius: 5px;
+  border-radius: 10px;
   color: #e0e0e0;
   animation: fadeInUp 0.5s forwards;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  color: #10dd5e;
+  margin-bottom: 20px;
+}
+
+.modal-content ul {
+  text-align: left;
+  margin: 15px 0;
+}
+
+.modal-content ul li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.modal-content ul li::before {
+  content: "▶";
+  color: #10dd5e;
+  position: absolute;
+  left: 0;
 }
 
 .close-button {
   color: #e0e0e0;
   position: absolute;
-  top: -7px;
-  right: 10px;
+  top: 10px;
+  right: 20px;
   font-size: 28px;
   cursor: pointer;
 }
@@ -390,7 +477,6 @@ section p {
   padding: 0;
   display: flex;
   flex-direction: column;
-
 }
 
 .skills-list li {
@@ -401,8 +487,8 @@ section p {
 }
 
 .skills-list li::before {
-  content: '\f058';
-  font-family: 'Font Awesome 5 Free';
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   position: absolute;
   left: 0;
@@ -427,7 +513,7 @@ section p {
 }
 
 .social-media {
-  color:white;
+  color: white;
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -491,17 +577,22 @@ footer p {
   }
 
   .projects-container {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 
   .project-item {
-    width: 90%;
+    width: 100%;
   }
 
   .modal-content {
-    width: 90%;
-    margin: 20% auto;
+    width: 95%;
+    margin: 10% auto;
+    padding: 20px;
+  }
+
+  .experience-item {
+    padding: 20px;
   }
 }
 
@@ -542,22 +633,20 @@ footer p {
   transition: 0.5s;
 }
 
-
-.show{
+.show {
   opacity: 1;
   filter: blur(0);
   transform: translateX(0);
 }
 
-.snake-game-img-container{
+.snake-game-img-container {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  gap:20px;
+  gap: 20px;
   justify-content: center;
 }
 
-.snake-game-img{
+.snake-game-img {
   width: 30%;
 }
-

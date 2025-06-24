@@ -16,6 +16,8 @@ const observer = new IntersectionObserver((entries) =>{
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((element) => observer.observe(element));
+
+
 menuToggle.addEventListener('click', () => {
   navLinks.classList.toggle('mobile-active');
   menuToggle.classList.toggle('active');
@@ -35,6 +37,7 @@ projectItems.forEach(item => {
     document.getElementById(modalId).style.display = 'block';
   });
 });
+
 
 closeButtons.forEach(btn => {
   btn.addEventListener('click', () => {

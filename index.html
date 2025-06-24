@@ -1,159 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Nolan Mai</title>
-  <!-- Responsive Meta Tag -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Favicon -->
-  <link rel="icon" href="images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg" type="image/x-icon">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
-  <!-- External CSS -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">
-      <a href="#">nolan</a>
-    </div>
-    <div class="menu-toggle">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#about">About Me</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <!-- Removed Testimonials link -->
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- Header Section -->
-  <header>
-    <div class="parallax-bg"></div>
-    <div class="header-content">
-      <h1>Hello, I'm Nolan</h1>
-      <p>Computer Science Student & Future Software Engineer</p>
-      <a href="#contact" class="btn">Get in Touch</a>
-      <a class = "btn">Or go through my portfolio by a game! (Still in production)</a>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <!-- About Me Section -->
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I'm Nolan Mai, a passionate problem solver and a software developer who enjoys
-        building stuff that makes life more interactive and engaging. 
-        My work spans web development, database design, and interactive applications, 
-        blending technical precision with user-focused design. Outside of coding, 
-        you will usally find me in the gym, brainstorming new app ideas, or working on a random project. 
-        Let’s create something awesome together! 🚀</p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects-container">
-        <!-- Project Item -->
-        <div class="project-item hidden" data-modal="modal1">
-          <h3>TreeTableApp</h3>
-          <p>TreeTableApp is a terminal-based tool for rendering hierarchical JSON data.</p>
-        </div>
-        <div class="project-item hidden" data-modal="modal2">
-          <h3>Snake Game With Statistics Webpage</h3>  
-          <p>A multiplayer Snake game client with real-time gameplay and a web-based score 
-            server using C#, Blazor, and SQL Server.</p>  
-        </div>
-        <!-- Repeat project items as needed -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nolan Mai</title>
+    <!-- Responsive Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg"
+      type="image/x-icon"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <a href="#">nolan</a>
       </div>
-      <!-- Modals for Projects -->
-      <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h2>TreeTableApp</h2>
-          <span class="close-button">&times;</span>
-          <p>TreeTableApp, built with Python and the Textual library, is a terminal-based tool for rendering
-             hierarchical JSON data. It displays the structure in a tree format and provides a tabular view of the node data. 
-             The app was initially built for displaying supercomputers' data at the Scientific Computing and Imaging Institute
-             at the University of Utah. </br> 
-             <a style="color:greenyellow" href = "https://github.com/PotBorger/Independent-Study-SCI">Link to repo</a>
+      <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+      <div class="parallax-bg"></div>
+      <div class="header-content">
+        <h1>Hello, I'm Nolan</h1>
+        <p>Computer Science Student & Future Software Engineer</p>
+        <div class="button-container">
+          <a href="#contact" class="btn">Get in Touch</a>
+          <a class="btn"
+            >Or go through my portfolio by a game! (Still in production)</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- About Me Section -->
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          I'm Nolan Mai, a passionate problem solver and a software developer
+          who enjoys building stuff that makes life more interactive and
+          engaging. My work spans web development, database design, and
+          interactive applications, blending technical precision with
+          user-focused design. I'm currently pursuing my Bachelor's in Computer
+          Science at the University of Utah with a 3.8 GPA, and I have hands-on
+          experience from multiple internships ranging from AI-powered web apps
+          to data visualization tools. Outside of coding, you will usually find
+          me in the gym, brainstorming new app ideas, or working on a random
+          project. Let's create something awesome together! 🚀
+        </p>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <div class="experience-container">
+          <div class="experience-item">
+            <h3>Assistant Research Engineer</h3>
+            <div class="company">
+              Scientific Computing and Imaging Institute (University of Utah)
+            </div>
+            <div class="date-location">
+              Aug 2024 – Present | Salt Lake City, UT
+            </div>
+            <ul>
+              <li>
+                Developing interactive data visualizations using D3.js and
+                SvelteKit to represent complex computer architecture experiment
+                metrics.
+              </li>
+              <li>
+                Collaborated with simulation engineers from the College of
+                William & Mary to transform thousands of raw performance metrics
+                into user-friendly charts, cutting analysis time by 80%.
+              </li>
+              <li>
+                Optimized rendering performance by 20%, supporting real-time
+                interaction with large-scale datasets.
+              </li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <h3>Fullstack Software Engineer Intern</h3>
+            <div class="company">
+              InCaria - A Lifestyle Analysis Platform/Tech Startup
+            </div>
+            <div class="date-location">
+              Jan 2025 – May 2025 | Salt Lake City, UT
+            </div>
+            <ul>
+              <li>
+                Developed a cross-platform mobile app using React Native with
+                TypeScript, contributing 20% toward MVP completion by building
+                core interface components and user workflows.
+              </li>
+              <li>
+                Integrated the React Native front end with a secure
+                Django/PostgreSQL backend via RESTful APIs, ensuring real-time
+                synchronization in health and lifestyle data handling.
+              </li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <h3>Software Engineer Intern</h3>
+            <div class="company">
+              Smart Education Now Technologies (SENTECHS)
+            </div>
+            <div class="date-location">
+              Jun 2024 – Aug 2024 | Ho Chi Minh City, Vietnam (On-site)
+            </div>
+            <ul>
+              <li>
+                Developed an advanced analysis tool using multiple APIs to
+                extract insights from IELTS passages, accelerating the product
+                launch by 10%.
+              </li>
+              <li>
+                Maintained a vocabulary-scraping pipeline with MongoDB,
+                enhancing data feeding for the company's LLM model by 25%.
+              </li>
+              <li>
+                Implemented RESTful endpoints for real-time data retrieval,
+                managing 2,000+ daily queries.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-container">
+          <!-- New Projects from Resume -->
+          <div class="project-item hidden" data-modal="modal-sparky">
+            <h3>sParky: Wildfire Prediction Web App</h3>
+            <p>
+              An AI-powered full-stack web application that predicts wildfire
+              and air quality threats using live sensor data and machine
+              learning.
             </p>
-          <!-- Optional: Include images or links -->
+            <div class="project-tech">
+              React | Node.js | AWS | OpenWeather | ML
+            </div>
+          </div>
+
+          <div class="project-item hidden" data-modal="modal-sprite">
+            <h3>Qt-Based Sprite Editor</h3>
+            <p>
+              A comprehensive sprite editor built in C++ with Qt, featuring
+              pixel-level editing, real-time animation preview, and project
+              serialization.
+            </p>
+            <div class="project-tech">C++ | Qt | UML</div>
+          </div>
+
+          <!-- Existing Projects -->
+          <div class="project-item hidden" data-modal="modal1">
+            <h3>TreeTableApp</h3>
+            <p>
+              TreeTableApp is a terminal-based tool for rendering hierarchical
+              JSON data, designed for displaying supercomputer data.
+            </p>
+            <div class="project-tech">Python | Textual</div>
+          </div>
+
+          <div class="project-item hidden" data-modal="modal2">
+            <h3>Snake Game With Statistics Webpage</h3>
+            <p>
+              A multiplayer Snake game client with real-time gameplay and a
+              web-based score server using C#, Blazor, and SQL Server.
+            </p>
+            <div class="project-tech">C# | Blazor | SQL Server</div>
+          </div>
         </div>
-      </div>
-      <div id="modal2" class="modal">
-        <div class="modal-content">
-          <h2>Snake Game With Statistics Webpage</h2>
-          <span class="close-button">&times;</span>
-          <p>Developed a multiplayer Snake game client and web-based 
-            score server using C#, Blazor, and SQL Server. Designed a 
-            responsive GUI for real-time gameplay, integrated a database 
-            to store and retrieve game sessions and player statistics, and 
-            built a web server to dynamically display game data through HTML pages. 
-            This project utilizes my full-stack development skills and introduces me to
-             real-time application management.</br> 
+
+        <!-- Modals for Projects -->
+        <!-- sParky Modal -->
+        <div id="modal-sparky" class="modal">
+          <div class="modal-content">
+            <h2>sParky: Wildfire Prediction Web App</h2>
+            <span class="close-button">&times;</span>
+            <p>
+              <strong>Technologies:</strong> React, Node.js, AWS, OpenWeather,
+              Machine Learning
+            </p>
+            <p>
+              sParky is a comprehensive AI-powered web application designed to
+              predict wildfire threats and provide air quality insights using
+              real-time data.
+            </p>
+
+            <h3>Key Features:</h3>
+            <ul>
+              <li>
+                Engineered a full-stack web app with a RESTful Node.js backend
+                predicting wildfire and air quality threats using live sensor
+                data
+              </li>
+              <li>
+                Trained and deployed an ML model on AWS SageMaker with 78.6%
+                accuracy, estimating wildfire probability and spread radius
+                across Utah's microclimates
+              </li>
+              <li>
+                Generated personalized health advisories and hyper-local
+                forecasts for 50+ locations daily via AWS Bedrock, powered by
+                real-time OpenWeather AQI inputs
+              </li>
+              <li>
+                Enabled dynamic wildfire risk visualization using AWS Location
+                Services, increasing platform engagement by 60% through
+                interactive, map-based insights
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sprite Editor Modal -->
+        <div id="modal-sprite" class="modal">
+          <div class="modal-content">
+            <h2>Qt-Based Sprite Editor</h2>
+            <span class="close-button">&times;</span>
+            <p><strong>Technologies:</strong> C++, Qt, UML</p>
+            <p>
+              A professional-grade sprite editor application built with Qt
+              framework, designed for creating and editing pixel art and
+              animations.
+            </p>
+
+            <h3>Key Features:</h3>
+            <ul>
+              <li>
+                Developed a Qt-based editor in C++ featuring pixel-level RGBA
+                editing with QImage/QPainter and intuitive mouse-driven
+                draw/erase tools
+              </li>
+              <li>
+                Built a real-time animation preview engine using QTimer and
+                custom QWidget rendering, allowing dynamic FPS control for
+                smooth playback
+              </li>
+              <li>
+                Engineered JSON serialization to persist sprite
+                projects—including per-pixel data and metadata—for seamless
+                save/load functionality
+              </li>
+              <li>
+                Designed system architecture with UML class diagrams and
+                leveraged Qt's signal/slot framework to implement a clean,
+                event-driven module structure
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Existing Modals -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h2>TreeTableApp</h2>
+            <span class="close-button">&times;</span>
+            <p><strong>Technologies:</strong> Python, Textual</p>
+            <p>
+              TreeTableApp, built with Python and the Textual library, is a
+              terminal-based tool for rendering hierarchical JSON data. It
+              displays the structure in a tree format and provides a tabular
+              view of the node data. The app was initially built for displaying
+              supercomputers' data at the Scientific Computing and Imaging
+              Institute at the University of Utah.
+            </p>
+            <p>
+              <a
+                style="color: greenyellow"
+                href="https://github.com/PotBorger/Independent-Study-SCI"
+                >Link to repo</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <div id="modal2" class="modal">
+          <div class="modal-content">
+            <h2>Snake Game With Statistics Webpage</h2>
+            <span class="close-button">&times;</span>
+            <p><strong>Technologies:</strong> C#, Blazor, SQL Server</p>
+            <p>
+              Developed a multiplayer Snake game client and web-based score
+              server using C#, Blazor, and SQL Server. Designed a responsive GUI
+              for real-time gameplay, integrated a database to store and
+              retrieve game sessions and player statistics, and built a web
+              server to dynamically display game data through HTML pages. This
+              project utilizes my full-stack development skills and introduces
+              me to real-time application management.
             </p>
             <div class="snake-game-img-container">
-            <img class="snake-game-img" src="images/snake_image.png">
-            <img class="snake-game-img" src="images/db_image.png">
+              <img
+                class="snake-game-img"
+                src="images/snake_image.png"
+                alt="Snake Game Screenshot"
+              />
+              <img
+                class="snake-game-img"
+                src="images/db_image.png"
+                alt="Database Screenshot"
+              />
             </div>
-          <!-- Optional: Include images or links -->
+          </div>
         </div>
-      </div>
-      <!-- Repeat modals for each project -->
-    </section>
+      </section>
 
-    <!-- Skills Section -->
-<!-- Skills Section -->
-<section id="skills">
-  <h2>Skills</h2>
-  <ul class="skills-list">
-    <li>Programming Languages: Python, Java, C#</li>
-    <li>Web Development: HTML, CSS, JavaScript, Svelte, ReactJS, Blazor</li>
-    <li>Database Management: SQL, MongoDB, PostgreSQL</li>
-    <!-- The "card" div triggers the resume modal -->
-    <div class="card" style="cursor:pointer;">
-      <a href="files/NOLAN MAI Resume.pdf" target="_blank" style="color:inherit; text-decoration:none;">
-        My resume
-      </a>
-    </div>
-      </ul>
+      <!-- Skills Section -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          <li>
+            Programming Languages: Java, JavaScript, TypeScript, Python, C#, C++
+          </li>
+          <li>
+            Web Development: PERN/MERN stack, React Native, SvelteKit, Blazor,
+            D3.js, Django, SpringBoot
+          </li>
+          <li>Database Management: SQL, PostgreSQL, MongoDB, Supabase</li>
+          <li>
+            Tools & Other: Git, Docker, REST APIs, AWS (SageMaker, Bedrock,
+            Location Services)
+          </li>
+          <div class="card" style="cursor: pointer">
+            <a
+              href="files/NOLAN MAI Resume.pdf"
+              target="_blank"
+              style="color: inherit; text-decoration: none"
+            >
+              My resume
+            </a>
+          </div>
+        </ul>
+      </section>
 
-</section>
+      <!-- Contact Section -->
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <p>
+          Email:
+          <a href="mailto:khanhtrinh232005@gmail.com"
+            >khanhtrinh232005@gmail.com</a
+          >
+        </p>
+        <p>Phone: <a href="tel:+13853548465">+1 385 354 8465</a></p>
+        <p>
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/nolanmai/">Nolan Mai</a>
+        </p>
+        <!-- Social Media Icons -->
+        <div class="social-media">
+          <a href="https://github.com/PotBorger" target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/nolanmai/" target="_blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+      </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:khanhtrinh232005@gmail.com">khanhtrinh232005@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/nolanmai/">Nolan Mai</a></p>
-      <!-- Social Media Icons -->
-      <div class="social-media">
-        <a href="https://github.com/PotBorger" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://www.linkedin.com/in/nolanmai/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <!-- Add other icons -->
-      </div>
-    </section>
-  </main>
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Nolan Mai. All rights reserved.</p>
+    </footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Nolan Mai. All rights reserved.</p>
-  </footer>
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
 
-  <!-- External JavaScript -->
-  <script src="script.js"></script>
-</body>
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("mobile-active");
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all hidden elements
+      const hiddenElements = document.querySelectorAll(".hidden");
+      hiddenElements.forEach((el) => observer.observe(el));
+
+      // Modal functionality
+      const projectItems = document.querySelectorAll(".project-item");
+      const modals = document.querySelectorAll(".modal");
+      const closeButtons = document.querySelectorAll(".close-button");
+
+      // Open modal when project item is clicked
+      projectItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          const modalId = item.getAttribute("data-modal");
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden"; // Prevent scrolling
+          }
+        });
+      });
+
+      // Close modal when close button is clicked
+      closeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = button.closest(".modal");
+          modal.style.display = "none";
+          document.body.style.overflow = "auto"; // Restore scrolling
+        });
+      });
+
+      // Close modal when clicking outside of modal content
+      modals.forEach((modal) => {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto"; // Restore scrolling
+          }
+        });
+      });
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          modals.forEach((modal) => {
+            if (modal.style.display === "block") {
+              modal.style.display = "none";
+              document.body.style.overflow = "auto"; // Restore scrolling
+            }
+          });
+        }
+      });
+
+      // Parallax effect for header (optional - can be removed for performance)
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector(".parallax-bg");
+        const speed = scrolled * 0.5;
+
+        if (parallax) {
+          parallax.style.transform = `translateY(${speed}px)`;
+        }
+      });
+
+      // Add loading animation delay to sections
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section, index) => {
+        section.style.animationDelay = `${index * 0.2}s`;
+      });
+    </script>
+  </body>
 </html>

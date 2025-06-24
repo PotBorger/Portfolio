@@ -12,9 +12,10 @@ const playerImage = new Image();
 playerImage.src = './img/playerDown.png'
 
 class Sprite {
-    constructor({position, velocity, image}){
+    constructor({position, velocity, image, frames={max:1}}){
         this.position = position
         this.image = image
+        this.frames = frames
     }
 
     draw(){
