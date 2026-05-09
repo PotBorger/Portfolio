@@ -8,6 +8,7 @@
   --accent: #49694c;
   --accent-soft: rgba(73, 105, 76, 0.12);
   --accent-strong: #e6f2dd;
+  --danger: #cf6d5f;
   --shadow: 10px 10px 0 rgba(24, 23, 21, 0.12);
 }
 
@@ -54,6 +55,18 @@ img {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .page-shell {
@@ -139,6 +152,7 @@ main {
 
 .hero,
 #about,
+#type,
 #projects,
 #experience,
 #stack,
@@ -244,6 +258,7 @@ h3 {
 }
 
 .hero-actions a,
+.hero-actions button,
 .card-link,
 .contact-list a {
   display: inline-flex;
@@ -254,6 +269,8 @@ h3 {
   padding: 0.55rem 0.8rem;
   background: rgba(255, 255, 255, 0.62);
   text-decoration: none;
+  font: inherit;
+  cursor: pointer;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
@@ -272,6 +289,7 @@ h3 {
 }
 
 .hero-actions a::before,
+.hero-actions button::before,
 .card-link::before,
 .contact-list a::before {
   content: ">";
@@ -283,6 +301,7 @@ h3 {
 }
 
 .hero-actions a:hover,
+.hero-actions button:hover,
 .card-link:hover,
 .contact-list a:hover {
   transform: translate(-2px, -2px);
@@ -383,10 +402,215 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
 }
 
+.type-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.92fr) minmax(0, 1.55fr);
+  gap: 1rem;
+}
+
+.type-intro,
+.type-console {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.type-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.type-chip,
+.type-reset {
+  border: 1px solid var(--ink);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--ink);
+  padding: 0.55rem 0.8rem;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.type-chip:hover,
+.type-reset:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-soft);
+  background: #fffef9;
+}
+
+.type-chip.is-active {
+  background: var(--panel-strong);
+  color: var(--accent-strong);
+  border-color: var(--panel-strong);
+  box-shadow: inset 0 0 0 1px rgba(230, 242, 221, 0.14);
+}
+
+.type-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.type-metric {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  padding: 0.9rem;
+}
+
+.type-metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: lowercase;
+}
+
+.type-metric strong {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  line-height: 1.1;
+}
+
+.type-toolbar,
+.type-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.type-status,
+.type-footer p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.type-surface {
+  position: relative;
+  min-height: 280px;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1.5px solid var(--panel-strong);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    var(--panel-strong);
+  cursor: text;
+}
+
+.typing-tab.is-focused .type-surface {
+  box-shadow:
+    inset 0 0 0 1px rgba(230, 242, 221, 0.2),
+    0 0 0 4px rgba(73, 105, 76, 0.18);
+}
+
+.typing-tab[hidden] {
+  display: none;
+}
+
+.type-passage {
+  position: relative;
+  z-index: 1;
+  max-width: 42ch;
+  font-size: clamp(1.12rem, 1.85vw, 1.5rem);
+  line-height: 1.95;
+  user-select: none;
+}
+
+.type-word,
+.type-space,
+.type-end-marker {
+  white-space: pre;
+}
+
+.type-word {
+  display: inline-flex;
+}
+
+.type-char,
+.type-space,
+.type-end-marker {
+  color: rgba(230, 242, 221, 0.26);
+  transition:
+    color 90ms linear,
+    background-color 90ms linear;
+}
+
+.type-char.is-correct,
+.type-space.is-correct {
+  color: #f8f4ea;
+}
+
+.type-char.is-incorrect,
+.type-space.is-incorrect {
+  color: #ffd2c9;
+  background: rgba(207, 109, 95, 0.2);
+  border-radius: 0.12rem;
+}
+
+.type-char.is-current,
+.type-space.is-current {
+  color: rgba(248, 244, 234, 0.56);
+}
+
+.type-caret {
+  position: absolute;
+  left: 1.25rem;
+  top: 1.25rem;
+  z-index: 2;
+  width: 2px;
+  height: 1.7rem;
+  background: #9dcb83;
+  border-radius: 999px;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 55ms linear,
+    height 55ms linear,
+    opacity 120ms ease;
+  animation: typeCaretBlink 1s step-end infinite;
+}
+
+.typing-tab:not(.is-focused):not(.is-running) .type-caret {
+  opacity: 0.45;
+}
+
+.typing-tab.is-finished .type-caret {
+  opacity: 0;
+  animation: none;
+}
+
+.typing-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .card {
   display: grid;
   gap: 0.95rem;
   padding: 1rem;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
 .card-top {
@@ -494,6 +718,12 @@ details[open] summary::before {
   }
 }
 
+@keyframes typeCaretBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 860px) {
   .topbar {
     position: static;
@@ -507,7 +737,8 @@ details[open] summary::before {
   }
 
   .hero-grid,
-  .split-layout {
+  .split-layout,
+  .type-layout {
     grid-template-columns: 1fr;
   }
 }
@@ -524,6 +755,7 @@ details[open] summary::before {
   .topbar-inner,
   .hero,
   #about,
+  #type,
   #projects,
   #experience,
   #stack,
@@ -537,10 +769,21 @@ details[open] summary::before {
   }
 
   .hero-actions a,
+  .hero-actions button,
   .card-link,
-  .contact-list a {
+  .contact-list a,
+  .type-reset {
     width: 100%;
     justify-content: center;
+  }
+
+  .type-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .type-surface {
+    min-height: 240px;
+    padding: 1rem;
   }
 }
 
@@ -560,9 +803,17 @@ details[open] summary::before {
   }
 
   .hero-actions a,
+  .hero-actions button,
   .card-link,
   .contact-list a,
-  .site-nav a {
+  .site-nav a,
+  .type-chip,
+  .type-reset,
+  .type-caret {
     transition: none;
+  }
+
+  .type-caret {
+    animation: none;
   }
 }

@@ -77,6 +77,9 @@
               </p>
 
               <div class="hero-actions">
+                <button type="button" data-role="open-typing">
+                  typingbuddy for fun cuz why not
+                </button>
                 <a href="#projects">view selected work</a>
                 <a
                   href="files/NOLAN MAI Resume.pdf"
@@ -156,6 +159,88 @@
           </div>
         </section>
 
+        <section
+          class="panel reveal typing-tab"
+          id="type"
+          data-section="type"
+          data-typing-test
+          hidden
+        >
+          <div class="section-head">
+            <p class="prompt">$ ./typingbuddy --sentence-mode</p>
+            <h2>typingbuddy</h2>
+          </div>
+
+          <div class="type-layout">
+            <div class="type-intro">
+              <p>
+                Hidden little typing mode for fun. It only reveals the current
+                sentence, keeps the surface clean, and stays focused on smooth
+                rhythm over visual noise.
+              </p>
+
+              <div class="type-controls" role="group" aria-label="Typing duration">
+                <button class="type-chip is-active" type="button" data-seconds="15">15s</button>
+                <button class="type-chip" type="button" data-seconds="30">30s</button>
+                <button class="type-chip" type="button" data-seconds="60">60s</button>
+              </div>
+
+              <div class="type-metrics" aria-label="Typing statistics">
+                <article class="type-metric">
+                  <span>wpm</span>
+                  <strong data-role="wpm">0</strong>
+                </article>
+                <article class="type-metric">
+                  <span>accuracy</span>
+                  <strong data-role="accuracy">100%</strong>
+                </article>
+                <article class="type-metric">
+                  <span>time</span>
+                  <strong data-role="time">15s</strong>
+                </article>
+                <article class="type-metric">
+                  <span>errors</span>
+                  <strong data-role="errors">0</strong>
+                </article>
+              </div>
+            </div>
+
+            <div class="type-console">
+              <div class="type-toolbar">
+                <p class="type-status" data-role="status">15s sentence flow</p>
+                <button class="type-reset" type="button" data-role="reset">new run</button>
+              </div>
+
+              <div
+                class="type-surface"
+                data-role="surface"
+                tabindex="0"
+                aria-label="Built-in typing test"
+              >
+                <label class="sr-only" for="typing-input">Typing input</label>
+                <input
+                  id="typing-input"
+                  class="typing-input"
+                  data-role="input"
+                  type="text"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  tabindex="-1"
+                />
+                <div class="type-passage" data-role="passage"></div>
+                <div class="type-caret" data-role="caret" aria-hidden="true"></div>
+              </div>
+
+              <div class="type-footer">
+                <p data-role="hint">click here or press enter to focus</p>
+                <p>escape resets the run</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="panel reveal" id="projects" data-section="projects">
           <div class="section-head">
             <p class="prompt">$ ls projects/featured</p>
@@ -163,6 +248,42 @@
           </div>
 
           <div class="card-grid">
+            <article class="card">
+              <div class="card-top">
+                <h3>Typing Dungeon</h3>
+                <p class="meta">Python / curses / JSON / afplay</p>
+              </div>
+              <p>
+                Terminal-first dungeon crawler where typing speed and accuracy
+                drive a tactical roguelike combat loop across branching floors,
+                event rooms, bosses, perks, relics, and persistent save slots.
+              </p>
+              <details>
+                <summary>show notes</summary>
+                <ul class="ascii-list">
+                  <li>Built layered combat systems including enemy intent, poise and stagger, shield timing, feint interrupts, quickstep bonuses, and word debuffs.</li>
+                  <li>Designed modular boundaries across game logic, UI rendering, input handling, entities, and word-assignment systems.</li>
+                  <li>Added local JSON saves, a top-10 leaderboard, optional audio, and a mechanics suite with 172 passing tests.</li>
+                </ul>
+              </details>
+              <div class="card-actions">
+                <a
+                  class="card-link"
+                  href="https://github.com/PotBorger/typing-dungeon"
+                  target="_blank"
+                  rel="noreferrer"
+                  >repo</a
+                >
+                <a
+                  class="card-link"
+                  href="https://youtu.be/QtAxXzygokw"
+                  target="_blank"
+                  rel="noreferrer"
+                  >gameplay</a
+                >
+              </div>
+            </article>
+
             <article class="card">
               <div class="card-top">
                 <h3>Desktop Code Editor</h3>
