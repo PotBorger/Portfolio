@@ -1,19 +1,21 @@
-# Nolan Mai's Portfolio Website
+# Nolan Mai Portfolio
 
-Welcome to my personal portfolio website! This site showcases my projects, skills, and ways to contact me.
+Minimal ASCII-style portfolio for Nolan Mai.
 
----
+Live site: [nolan-mai.is-a.dev](https://nolan-mai.is-a.dev/)
 
-## It's LIVE at: https://nolan-mai.is-a.dev/
+## Stack
 
----
+- Plain HTML
+- Plain CSS
+- Vanilla JavaScript
 
-## Contact
+## Local Preview
 
-- **Email**: [khanhtrinh232005@gmail.com](mailto:khanhtrinh232005@gmail.com)
-- **LinkedIn**: [Nolan Mai](https://www.linkedin.com/in/nolanmai)
-- **GitHub**: [PotBorger](https://github.com/PotBorger)
+Run a simple static server from the repo root, for example:
 
----
+```bash
+python3 -m http.server 8000
+```
 
-
+Then open [http://localhost:8000](http://localhost:8000).
