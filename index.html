@@ -6,12 +6,12 @@
     <title>Nolan Mai | Software Engineer</title>
     <meta
       name="description"
-      content="Minimal ASCII-style portfolio for Nolan Mai, a software engineer focused on data tools, full-stack apps, and clean interfaces."
+      content="ASCII-style portfolio for Nolan Mai — software engineer working on data tools, dev tooling, and clean interfaces."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -30,461 +30,388 @@
         <div class="shell-bar" aria-hidden="true">
           <span>nolan@portfolio</span>
           <span>~/ascii-site</span>
-          <span>plain html / css / js</span>
+          <span class="pulse"><span class="live-dot">●</span>online</span>
         </div>
 
         <div class="topbar-inner">
-          <a class="brand" href="#top">nolan mai</a>
+          <a class="brand" href="#top">nolan_mai</a>
           <nav class="site-nav" aria-label="Primary">
-            <a href="#about">./about</a>
-            <a href="#projects">./projects</a>
-            <a href="#experience">./experience</a>
-            <a href="#stack">./stack</a>
-            <a href="#contact">./contact</a>
+            <a href="#about">about</a>
+            <a href="#projects">work</a>
+            <a href="#experience">exp</a>
+            <a href="#stack">stack</a>
+            <a href="#contact">contact</a>
             <a
+              class="nav-cta"
               href="files/NOLAN MAI Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              >./resume.pdf</a
+              >resume.pdf →</a
             >
           </nav>
         </div>
       </header>
 
       <main id="content">
-        <section class="panel hero reveal is-visible" data-section="top">
-          <p class="prompt">$ cat intro.txt</p>
-
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <pre class="ascii-logo" aria-hidden="true">
+        <section class="panel hero reveal is-visible">
+          <pre class="ascii-logo" aria-hidden="true">
  _   _       _
 | \ | | ___ | | __ _ _ __
 |  \| |/ _ \| |/ _` | '_ \
 | |\  | (_) | | (_| | | | |
 |_| \_|\___/|_|\__,_|_| |_|
-              </pre>
-              <h1>Nolan Mai</h1>
-              <p class="lead">
-                Software engineer focused on data-heavy tools, clear interfaces,
-                and products that stay usable when the problem gets messy.
-              </p>
-              <p class="hero-note">
-                I am pursuing a B.S. in Computer Science at the University of
-                Utah, expected May 2027, and I build across research tooling,
-                mobile apps, backend systems, native desktop software, and
-                interactive visualizations.
-              </p>
+          </pre>
 
-              <div class="hero-actions">
-                <a href="#projects">view selected work</a>
-                <a
-                  href="files/NOLAN MAI Resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  >open resume</a
-                >
-                <a href="mailto:nolanmai1811@gmail.com">send email</a>
-              </div>
+          <div class="terminal-window" aria-label="Intro terminal">
+            <div class="term-header">
+              <span class="dot dot-r"></span>
+              <span class="dot dot-y"></span>
+              <span class="dot dot-g"></span>
+              <span class="term-title">nolan@portfolio — zsh</span>
             </div>
+            <div class="term-body" id="typer" aria-live="polite">
+              <noscript>
+                <p>$ whoami</p>
+                <p>nolan mai — software engineer.</p>
+                <p>$ cat focus.txt</p>
+                <p>data-heavy tools. clear interfaces. messy problems made usable.</p>
+                <p>$ ls status/</p>
+                <p>interning @ fpt is — building an mcp system</p>
+                <p>b.s. cs · university of utah · may 2027</p>
+              </noscript>
+            </div>
+          </div>
 
-            <aside class="hero-terminal" aria-label="Quick facts">
-              <p class="terminal-title">status.log</p>
-              <dl class="fact-list">
-                <div>
-                  <dt>recent</dt>
-                  <dd>Software Engineer Intern at Select Portfolio Servicing</dd>
-                </div>
-                <div>
-                  <dt>focus</dt>
-                  <dd>Code analysis platforms, data visualization, full-stack product work</dd>
-                </div>
-                <div>
-                  <dt>base</dt>
-                  <dd>Salt Lake City, UT / Ho Chi Minh City, VN</dd>
-                </div>
-                <div>
-                  <dt>school</dt>
-                  <dd>B.S. Computer Science, University of Utah, expected May 2027</dd>
-                </div>
-                <div>
-                  <dt>signal</dt>
-                  <dd>3.8 GPA, 709-test desktop editor, shipped LLM-assisted code explorer tooling</dd>
-                </div>
-              </dl>
-            </aside>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#projects">view work →</a>
+            <a
+              href="files/NOLAN MAI Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              >open resume</a
+            >
+            <a href="mailto:nolanmai1811@gmail.com">say hi</a>
           </div>
         </section>
 
-        <section class="panel reveal" id="about" data-section="about">
+        <section class="panel reveal" id="about">
           <div class="section-head">
-            <p class="prompt">$ sed -n '1,40p' about.md</p>
+            <p class="prompt">$ cat about.md</p>
             <h2>about</h2>
           </div>
 
-          <div class="split-layout">
-            <div>
-              <p>
-                I'm Nolan Mai, a builder who likes translating complicated
-                systems into interfaces people can actually understand. The work
-                I enjoy most sits in the middle of engineering and product:
-                dashboards for research teams, mobile flows for real users, and
-                backend services that make the front end feel effortless.
-              </p>
-              <p>
-                I tend to gravitate toward projects with a lot of signal buried
-                inside noisy data. That is why my recent work spans computer
-                architecture visualization, health-tech product development, and
-                ML-assisted analysis tools.
-              </p>
-            </div>
+          <p class="lead">
+            I build readable systems out of messy data.
+          </p>
+          <p class="muted-copy">
+            CS @ University of Utah (May 2027). Currently at FPT IS
+            building an MCP (Model Context Protocol) system that connects
+            internal tooling to AI assistants. Past work spans research
+            dashboards, mobile health flows, and native desktop tooling.
+          </p>
 
-            <div class="note-stack">
-              <article>
-                <h3>what i optimize for</h3>
-                <p>Readable systems, strong UX judgment, and measurable impact.</p>
-              </article>
-              <article>
-                <h3>what i build with</h3>
-                <p>Python, React, SvelteKit, Django, ASP.NET Core, PostgreSQL, Qt.</p>
-              </article>
-              <article>
-                <h3>what i like</h3>
-                <p>Developer tooling, system mapping, data visualization, and thoughtful product work.</p>
-              </article>
-            </div>
-          </div>
+          <ul class="tag-row">
+            <li>dev tooling</li>
+            <li>data viz</li>
+            <li>full-stack</li>
+            <li>llm pipelines</li>
+            <li>readable systems</li>
+          </ul>
         </section>
 
-        <section class="panel reveal" id="projects" data-section="projects">
+        <section class="panel reveal" id="projects">
           <div class="section-head">
-            <p class="prompt">$ ls projects/featured</p>
+            <p class="prompt">$ ls -1 projects/</p>
             <h2>selected work</h2>
           </div>
 
-          <div class="card-grid">
-            <article class="card">
-              <div class="card-top">
-                <h3>Typing Dungeon</h3>
-                <p class="meta">Python / curses / JSON / afplay</p>
-              </div>
-              <p>
-                Terminal-first dungeon crawler where typing speed and accuracy
-                drive a tactical roguelike combat loop across branching floors,
-                event rooms, bosses, perks, relics, and persistent save slots.
-              </p>
-              <details>
-                <summary>show notes</summary>
+          <ul class="project-list">
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">typing-dungeon.md</span>
+                <span class="meta-inline">python · 172 tests</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Terminal roguelike where typing speed and accuracy drive
+                  tactical combat across branching floors.
+                </p>
                 <ul class="ascii-list">
-                  <li>Built layered combat systems including enemy intent, poise and stagger, shield timing, feint interrupts, quickstep bonuses, and word debuffs.</li>
-                  <li>Designed modular boundaries across game logic, UI rendering, input handling, entities, and word-assignment systems.</li>
-                  <li>Added local JSON saves, a top-10 leaderboard, optional audio, and a mechanics suite with 172 passing tests.</li>
+                  <li>Combat layers: intent, poise, stagger, feint interrupts, quickstep, word debuffs.</li>
+                  <li>JSON saves, top-10 leaderboard, audio cues, 172 passing tests.</li>
                 </ul>
-              </details>
-              <div class="card-actions">
-                <a
-                  class="card-link"
-                  href="https://github.com/PotBorger/typing-dungeon"
-                  target="_blank"
-                  rel="noreferrer"
-                  >repo</a
-                >
-                <a
-                  class="card-link"
-                  href="https://youtu.be/QtAxXzygokw"
-                  target="_blank"
-                  rel="noreferrer"
-                  >gameplay</a
-                >
+                <div class="card-actions">
+                  <a
+                    class="card-link"
+                    href="https://github.com/PotBorger/typing-dungeon"
+                    target="_blank"
+                    rel="noreferrer"
+                    >repo</a
+                  >
+                  <a
+                    class="card-link"
+                    href="https://youtu.be/QtAxXzygokw"
+                    target="_blank"
+                    rel="noreferrer"
+                    >gameplay</a
+                  >
+                </div>
               </div>
-            </article>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>Desktop Code Editor</h3>
-                <p class="meta">Python / PySide6 / Qt / pytest / pytest-qt</p>
-              </div>
-              <p>
-                Native desktop code editor with multi-tab editing, split panes,
-                drag-and-drop tab movement, file explorer workflows, and
-                save-state aware document management.
-              </p>
-              <details>
-                <summary>show notes</summary>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">desktop-editor.md</span>
+                <span class="meta-inline">pyside6 · 709 tests · 96% cov</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Native code editor with multi-tab editing, split panes,
+                  drag-and-drop tabs, and save-state aware documents.
+                </p>
                 <ul class="ascii-list">
-                  <li>Built a 6.1K+ line editor focused on real developer workflows.</li>
-                  <li>Improved large-file opening by 99.9% and replace-all by 99.6% on profiled workloads.</li>
-                  <li>Added 25 file extensions, 6 themes, and reliability coverage with 709 tests at 96% coverage.</li>
+                  <li>6.1K+ lines focused on real developer workflows.</li>
+                  <li>99.9% faster large-file open, 99.6% faster replace-all on profiled workloads.</li>
                 </ul>
-              </details>
-              <span class="card-tag">private build / demo on request</span>
-            </article>
+                <span class="card-tag">private build · demo on request</span>
+              </div>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>LMS Role-Based System</h3>
-                <p class="meta">C# / ASP.NET Core MVC / EF Core / MySQL</p>
-              </div>
-              <p>
-                Full-stack learning management system supporting registration,
-                courses, classes, submissions, grading, GPA calculation, and
-                secure role-based access.
-              </p>
-              <details>
-                <summary>show notes</summary>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">lms-platform.md</span>
+                <span class="meta-inline">c# · asp.net · mysql</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Full-stack LMS with registration, courses, grading, GPA,
+                  and role-based access.
+                </p>
                 <ul class="ascii-list">
-                  <li>Built 24+ controller actions for end-to-end LMS operations.</li>
-                  <li>Separated auth and academic records with 2 EF Core DbContexts.</li>
-                  <li>Implemented weighted grade recalculation across 10 relational entities.</li>
+                  <li>24+ controller actions across the end-to-end flow.</li>
+                  <li>Weighted grade recalculation across 10 relational entities.</li>
                 </ul>
-              </details>
-              <span class="card-tag">academic full-stack system</span>
-            </article>
+                <span class="card-tag">academic full-stack system</span>
+              </div>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>sParky</h3>
-                <p class="meta">React / Node.js / AWS / OpenWeather</p>
-              </div>
-              <p>
-                AI-powered wildfire and air quality web app that turns live
-                environmental data into risk predictions, localized forecasts,
-                and health guidance.
-              </p>
-              <details>
-                <summary>show notes</summary>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">sparky.md</span>
+                <span class="meta-inline">react · aws · sagemaker</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  AI wildfire + air quality app turning live environmental
+                  data into risk predictions and health guidance.
+                </p>
                 <ul class="ascii-list">
-                  <li>Trained and deployed an AWS SageMaker model with 78.6% accuracy.</li>
-                  <li>Generated personalized advisories with AWS Bedrock.</li>
-                  <li>Built map-based risk views for 50+ Utah locations.</li>
+                  <li>SageMaker model deployed at 78.6% accuracy.</li>
+                  <li>Personalized advisories via AWS Bedrock, map views for 50+ locations.</li>
                 </ul>
-              </details>
-              <a
-                class="card-link"
-                href="https://github.com/PotBorger/sParky"
-                target="_blank"
-                rel="noreferrer"
-                >repo</a
-              >
-            </article>
+                <div class="card-actions">
+                  <a
+                    class="card-link"
+                    href="https://github.com/PotBorger/sParky"
+                    target="_blank"
+                    rel="noreferrer"
+                    >repo</a
+                  >
+                </div>
+              </div>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>TreeTableApp</h3>
-                <p class="meta">Python / Textual</p>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">treetable.md</span>
+                <span class="meta-inline">python · textual</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Terminal tool that renders deeply nested JSON as both tree
+                  and table for supercomputer datasets at SCI Institute.
+                </p>
+                <div class="card-actions">
+                  <a
+                    class="card-link"
+                    href="https://github.com/PotBorger/Independent-Study-SCI"
+                    target="_blank"
+                    rel="noreferrer"
+                    >repo</a
+                  >
+                </div>
               </div>
-              <p>
-                Terminal-first tool for rendering hierarchical JSON data in both
-                tree and tabular forms, designed for large supercomputer
-                datasets.
-              </p>
-              <details>
-                <summary>show notes</summary>
-                <ul class="ascii-list">
-                  <li>Built for research workflows at the SCI Institute.</li>
-                  <li>Turns deeply nested data into readable terminal output.</li>
-                  <li>Balances structure discovery with quick inspection.</li>
-                </ul>
-              </details>
-              <a
-                class="card-link"
-                href="https://github.com/PotBorger/Independent-Study-SCI"
-                target="_blank"
-                rel="noreferrer"
-                >repo</a
-              >
-            </article>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>Qt Sprite Editor</h3>
-                <p class="meta">C++ / Qt / JSON serialization</p>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">sprite-editor.md</span>
+                <span class="meta-inline">c++ · qt</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Desktop sprite editor with pixel drawing, real-time
+                  animation preview, and project save/load.
+                </p>
+                <span class="card-tag">coursework · demo on request</span>
               </div>
-              <p>
-                Desktop sprite editor with pixel-level drawing, real-time
-                animation preview, and project save/load support.
-              </p>
-              <details>
-                <summary>show notes</summary>
-                <ul class="ascii-list">
-                  <li>Implemented RGBA editing with QImage and QPainter.</li>
-                  <li>Added animation playback controls with custom widget rendering.</li>
-                  <li>Designed a clean event-driven architecture with Qt signals and slots.</li>
-                </ul>
-              </details>
-              <span class="card-tag">coursework / demo on request</span>
-            </article>
+            </li>
 
-            <article class="card">
-              <div class="card-top">
-                <h3>Snake Game + Stats Server</h3>
-                <p class="meta">C# / Blazor / SQL Server</p>
+            <li class="project">
+              <button class="project-trigger" type="button" aria-expanded="false">
+                <span class="cmd">$ cat</span>
+                <span class="file">snake-stats.md</span>
+                <span class="meta-inline">c# · blazor · sql server</span>
+                <span class="toggle">[+]</span>
+              </button>
+              <div class="project-body" hidden>
+                <p>
+                  Multiplayer snake client paired with a database-backed
+                  score server and stats pages.
+                </p>
+                <span class="card-tag">course project</span>
               </div>
-              <p>
-                Multiplayer snake client paired with a database-backed score
-                server and web pages for surfacing sessions and player stats.
-              </p>
-              <details>
-                <summary>show notes</summary>
-                <ul class="ascii-list">
-                  <li>Connected real-time gameplay with persistent match storage.</li>
-                  <li>Built dynamic pages for inspecting historical game data.</li>
-                  <li>Used the project to sharpen end-to-end systems thinking.</li>
-                </ul>
-              </details>
-              <span class="card-tag">course project</span>
-            </article>
-          </div>
+            </li>
+          </ul>
         </section>
 
-        <section class="panel reveal" id="experience" data-section="experience">
+        <section class="panel reveal" id="experience">
           <div class="section-head">
-            <p class="prompt">$ tail -n +1 experience.log</p>
+            <p class="prompt">$ git log --author=nolan</p>
             <h2>experience</h2>
           </div>
 
-          <div class="timeline">
-            <article class="timeline-item">
+          <ol class="timeline">
+            <li class="timeline-item">
               <div class="timeline-head">
-                <div>
-                  <h3>Software Engineer Intern</h3>
-                  <p class="meta">Select Portfolio Servicing, Inc.</p>
-                </div>
-                <p class="date">Sep 2025 - Dec 2025</p>
+                <h3>SWE Intern · FPT IS</h3>
+                <span class="date">2026 – Present</span>
               </div>
               <ul class="ascii-list">
-                <li>Designed and built a Python static analysis platform for legacy C# applications across 10+ internal projects.</li>
-                <li>Extracted 7+ artifact types including endpoints, ORM models, database relations, call sites, and service dependencies.</li>
-                <li>Built a React Flow architecture explorer that cut manual code tracing from hours to minutes.</li>
-                <li>Integrated Python microservices with a local LLM pipeline to generate consistent business-level documentation.</li>
+                <li>Building an MCP (Model Context Protocol) system that connects internal tooling to AI assistants.</li>
               </ul>
-            </article>
+            </li>
 
-            <article class="timeline-item">
+            <li class="timeline-item">
               <div class="timeline-head">
-                <div>
-                  <h3>Assistant Research Engineer</h3>
-                  <p class="meta">
-                    Scientific Computing and Imaging Institute, University of Utah
-                  </p>
-                </div>
-                <p class="date">Aug 2024 - Dec 2025</p>
+                <h3>SWE Intern · Select Portfolio Servicing</h3>
+                <span class="date">Sep – Dec 2025</span>
               </div>
               <ul class="ascii-list">
-                <li>Built web-based analytics dashboards for computer-architecture experiments using D3.js, SvelteKit, and Python.</li>
-                <li>Transformed thousands of raw telemetry metrics into structured datasets and actionable visualizations.</li>
-                <li>Reduced analysis turnaround by 80% through cleaner data pipelines and better visual interfaces.</li>
-                <li>Improved visualization rendering throughput by 20% with preprocessing, incremental updates, and DOM or Canvas optimization.</li>
+                <li>Built a Python static analysis platform for legacy C# across 10+ projects.</li>
+                <li>React Flow architecture explorer cut manual code tracing from hours to minutes.</li>
+                <li>Wired a local LLM pipeline for consistent business-level docs.</li>
               </ul>
-            </article>
+            </li>
 
-            <article class="timeline-item">
+            <li class="timeline-item">
               <div class="timeline-head">
-                <div>
-                  <h3>Fullstack Software Engineer Intern</h3>
-                  <p class="meta">InCaria</p>
-                </div>
-                <p class="date">Jan 2025 - May 2025</p>
+                <h3>Research Engineer · SCI Institute, U of U</h3>
+                <span class="date">Aug 2024 – Dec 2025</span>
               </div>
               <ul class="ascii-list">
-                <li>Developed React Native and TypeScript flows that contributed 20% toward MVP completion.</li>
-                <li>Integrated the mobile front end with a secure Django and PostgreSQL backend over REST APIs.</li>
-                <li>Supported real-time synchronization for health and lifestyle data handling.</li>
+                <li>Built D3 / SvelteKit dashboards for computer-architecture experiments.</li>
+                <li>Cut analysis turnaround 80% and lifted render throughput 20%.</li>
               </ul>
-            </article>
+            </li>
 
-            <article class="timeline-item">
+            <li class="timeline-item">
               <div class="timeline-head">
-                <div>
-                  <h3>Software Engineer Intern</h3>
-                  <p class="meta">Smart Education Now Technologies (SENTECHS)</p>
-                </div>
-                <p class="date">Jun 2024 - Aug 2024</p>
+                <h3>Fullstack Intern · InCaria</h3>
+                <span class="date">Jan – May 2025</span>
               </div>
               <ul class="ascii-list">
-                <li>Built an API-driven IELTS passage analysis tool that accelerated launch readiness.</li>
-                <li>Maintained a MongoDB vocabulary pipeline feeding the company's LLM workflow.</li>
-                <li>Implemented REST endpoints handling 2,000+ daily data queries.</li>
+                <li>Shipped React Native + TS flows worth ~20% of MVP completion.</li>
+                <li>Wired the app to a Django + Postgres backend over REST.</li>
               </ul>
-            </article>
-          </div>
+            </li>
+
+            <li class="timeline-item">
+              <div class="timeline-head">
+                <h3>SWE Intern · SENTECHS</h3>
+                <span class="date">Jun – Aug 2024</span>
+              </div>
+              <ul class="ascii-list">
+                <li>API-driven IELTS passage analysis tool, MongoDB vocab pipeline feeding an LLM workflow.</li>
+                <li>REST endpoints handling 2,000+ daily queries.</li>
+              </ul>
+            </li>
+          </ol>
         </section>
 
-        <section class="panel reveal" id="stack" data-section="stack">
+        <section class="panel reveal" id="stack">
           <div class="section-head">
-            <p class="prompt">$ cat stack.txt</p>
+            <p class="prompt">$ stack --list</p>
             <h2>stack</h2>
           </div>
 
-          <div class="stack-grid">
-            <article class="stack-card">
-              <h3>languages</h3>
-              <p>Java, JavaScript, TypeScript, Python, C#, C++, Kotlin</p>
-            </article>
-            <article class="stack-card">
-              <h3>frontend</h3>
-              <p>React, React Native, SvelteKit, D3.js, Blazor, ASP.NET Core MVC</p>
-            </article>
-            <article class="stack-card">
-              <h3>backend + data</h3>
-              <p>Node.js, Django, Spring Boot, REST APIs, PostgreSQL, MongoDB, MySQL, SQLite, Supabase</p>
-            </article>
-            <article class="stack-card">
-              <h3>tools</h3>
-              <p>Git, Docker, AWS SageMaker, AWS Bedrock, AWS Location Services, React Flow, pytest</p>
-            </article>
-          </div>
+          <dl class="stack-rows">
+            <div class="stack-row">
+              <dt>lang</dt>
+              <dd>java · ts · python · c# · c++ · kotlin</dd>
+            </div>
+            <div class="stack-row">
+              <dt>front</dt>
+              <dd>react · react native · sveltekit · d3 · blazor</dd>
+            </div>
+            <div class="stack-row">
+              <dt>back</dt>
+              <dd>node · django · spring · postgres · mongo · sqlite · supabase</dd>
+            </div>
+            <div class="stack-row">
+              <dt>tools</dt>
+              <dd>git · docker · aws (sagemaker, bedrock) · qt · pytest</dd>
+            </div>
+          </dl>
         </section>
 
-        <section class="panel reveal" id="contact" data-section="contact">
+        <section class="panel reveal" id="contact">
           <div class="section-head">
             <p class="prompt">$ ./reach-out.sh</p>
             <h2>contact</h2>
           </div>
 
-          <div class="split-layout">
-            <div>
-              <p>
-                I'm open to thoughtful engineering opportunities, collaborative
-                side projects, and teams that care about both technical depth
-                and user clarity.
-              </p>
-              <p>
-                If you have something interesting in progress, I'd love to hear
-                about it.
-              </p>
-            </div>
+          <p class="lead">Open to engineering roles and interesting collabs.</p>
 
-            <div class="contact-list">
-              <a href="mailto:nolanmai1811@gmail.com">mail: nolanmai1811@gmail.com</a>
-              <a href="tel:+13853548465">call: +1 385 354 8465</a>
-              <a
-                href="https://www.linkedin.com/in/nolanmai/"
-                target="_blank"
-                rel="noreferrer"
-                >linkedin: /in/nolanmai</a
-              >
-              <a
-                href="https://github.com/PotBorger"
-                target="_blank"
-                rel="noreferrer"
-                >github: /PotBorger</a
-              >
-              <a
-                href="files/NOLAN MAI Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                >resume: open pdf</a
-              >
-            </div>
+          <div class="contact-list">
+            <a href="mailto:nolanmai1811@gmail.com">mail · nolanmai1811@gmail.com</a>
+            <a
+              href="https://www.linkedin.com/in/nolanmai/"
+              target="_blank"
+              rel="noreferrer"
+              >linkedin · /in/nolanmai</a
+            >
+            <a
+              href="https://github.com/PotBorger"
+              target="_blank"
+              rel="noreferrer"
+              >github · /PotBorger</a
+            >
+            <a
+              href="files/NOLAN MAI Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              >resume · pdf</a
+            >
           </div>
         </section>
       </main>
 
       <footer class="footer">
         <p>
-          Built with plain HTML, CSS, and a little JavaScript.
-          <span id="year"></span>
+          plain html · css · js · <span id="year"></span>
         </p>
       </footer>
     </div>
