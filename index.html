@@ -272,15 +272,20 @@
             <li class="project">
               <button class="project-trigger" type="button" aria-expanded="false">
                 <span class="cmd">$ cat</span>
-                <span class="file">snake-stats.md</span>
-                <span class="meta-inline">c# · blazor · sql server</span>
+                <span class="file">snake-multiplayer.md</span>
+                <span class="meta-inline">c# · asp.net · blazor · sql server</span>
                 <span class="toggle">[+]</span>
               </button>
               <div class="project-body" hidden>
                 <p>
-                  Multiplayer snake client paired with a database-backed
-                  score server and stats pages.
+                  Multiplayer client–server snake in C# with an ASP.NET
+                  backend and Blazor UI, holding authoritative game state
+                  for 25 concurrent players.
                 </p>
+                <ul class="ascii-list">
+                  <li>Event-driven real-time sync with disconnect / reconnect handling.</li>
+                  <li>SQL Server leaderboard + session tracking with parameterized CRUD and indexing — 40% lower query latency.</li>
+                </ul>
                 <span class="card-tag">course project</span>
               </div>
             </li>
@@ -372,7 +377,7 @@
             </div>
             <div class="stack-row">
               <dt>tools</dt>
-              <dd>git · docker · aws (sagemaker, bedrock) · qt · pytest</dd>
+              <dd>git · docker · aws (sagemaker, bedrock, ec2) · qt · pytest</dd>
             </div>
           </dl>
         </section>
