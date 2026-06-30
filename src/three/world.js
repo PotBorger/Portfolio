@@ -72,12 +72,17 @@ export function createWorld(canvas, labelLayer, options = {}) {
     600
   );
 
+  // Coarse pointer (touch) or narrow viewport = mobile / low-power device.
+  const isLowEnd =
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.innerWidth < 768;
+
   const renderer = new THREE.WebGLRenderer({
     canvas,
-    antialias: true,
+    antialias: !isLowEnd,
     powerPreference: "high-performance",
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isLowEnd ? 1.5 : 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
@@ -85,17 +90,21 @@ export function createWorld(canvas, labelLayer, options = {}) {
   const labelRenderer = new CSS2DRenderer({ element: labelLayer });
   labelRenderer.setSize(window.innerWidth, window.innerHeight);
 
-  // Postprocessing: subtle bloom so emissive edges + horizon glow read.
-  const composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    0.55, // strength
-    0.7, // radius
-    0.85 // threshold
-  );
-  composer.addPass(bloom);
-  composer.addPass(new OutputPass());
+  // Postprocessing: bloom on capable devices only. Skipping it on mobile saves
+  // one full-resolution render-target read + write per frame.
+  let composer = null;
+  if (!isLowEnd) {
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloom = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      0.55, // strength
+      0.7,  // radius
+      0.85  // threshold
+    );
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+  }
 
   // ── lighting ──────────────────────────────
   scene.add(new THREE.AmbientLight(palette.navy, 1.2));
@@ -108,7 +117,7 @@ export function createWorld(canvas, labelLayer, options = {}) {
 
   // ── static environment ────────────────────
   scene.add(gridFloor());
-  const dustField = dust();
+  const dustField = dust(isLowEnd ? 120 : 260);
   scene.add(dustField);
 
   // ── stations + content ────────────────────
@@ -293,6 +302,7 @@ export function createWorld(canvas, labelLayer, options = {}) {
   const raycaster = new THREE.Raycaster();
   const ndc = new THREE.Vector2();
   let hovered = null;
+  let lastRayTime = 0; // throttle raycasting to ~30 fps max
 
   function pickProject(clientX, clientY) {
     ndc.x = (clientX / window.innerWidth) * 2 - 1;
@@ -336,7 +346,11 @@ export function createWorld(canvas, labelLayer, options = {}) {
       return;
     }
     if (activeStation === 2 && !focusedProjectId) {
-      setHover(pickProject(e.clientX, e.clientY));
+      const now = performance.now();
+      if (now - lastRayTime >= 32) { // ~30 fps cap for ray tests
+        lastRayTime = now;
+        setHover(pickProject(e.clientX, e.clientY));
+      }
     }
   }
 
@@ -368,7 +382,7 @@ export function createWorld(canvas, labelLayer, options = {}) {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
+    if (composer) composer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
   }
 
@@ -377,11 +391,28 @@ export function createWorld(canvas, labelLayer, options = {}) {
   window.addEventListener("pointerup", onPointerUp);
   window.addEventListener("resize", onResize);
 
+  // Pause the render loop when the tab is hidden; resume when visible again.
+  // This eliminates GPU work for inactive tabs entirely.
+  function onVisibilityChange() {
+    if (!started) return;
+    if (document.hidden) {
+      running = false;
+      cancelAnimationFrame(raf);
+      clock.stop();
+    } else {
+      running = true;
+      clock.start();
+      frame();
+    }
+  }
+  document.addEventListener("visibilitychange", onVisibilityChange);
+
   // ── render loop ───────────────────────────
   const clock = new THREE.Clock();
   const labelPos = new THREE.Vector3();
   let raf = 0;
   let running = false;
+  let started = false;
 
   function frame() {
     if (!running) return;
@@ -406,7 +437,11 @@ export function createWorld(canvas, labelLayer, options = {}) {
     }
 
     applyCamera();
-    composer.render();
+    if (composer) {
+      composer.render();
+    } else {
+      renderer.render(scene, camera);
+    }
 
     // Cull labels by distance so far stations don't pile up at the
     // vanishing point. (CSS2D labels otherwise always render.)
@@ -424,6 +459,7 @@ export function createWorld(canvas, labelLayer, options = {}) {
   return {
     start() {
       if (running) return;
+      started = true;
       running = true;
       clock.start();
       frame();
@@ -442,10 +478,12 @@ export function createWorld(canvas, labelLayer, options = {}) {
     dispose() {
       running = false;
       cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("resize", onResize);
+      if (composer) composer.dispose();
       renderer.dispose();
     },
   };
