@@ -1,6 +1,6 @@
-// Entry point. Decides between the immersive 3D world and the static 2D
-// site, then wires whichever mode is active. Three.js is imported lazily so
-// it never loads on the 2D path.
+// Entry point. Boots into the retro 3D museum (boot screen → entrance →
+// walkable museum) or the accessible static 2D site. Three.js is imported
+// lazily so it never loads on the 2D path.
 
 import "../styles.css";
 import { initStaticSite } from "./ui/static-site.js";
@@ -22,98 +22,100 @@ function hasWebGL() {
 }
 
 const els = {
-  app: document.getElementById("app-3d"),
   canvas: document.getElementById("scene-canvas"),
   labelLayer: document.getElementById("label-layer"),
   loader: document.getElementById("loader"),
-  typer: document.getElementById("typer"),
-  nav: document.getElementById("scene-nav"),
-  indicator: document.getElementById("station-indicator"),
-  panel: document.getElementById("project-panel"),
+  entrance: document.getElementById("entrance"),
+  enter: document.getElementById("enter-museum"),
+  viewSimple: document.getElementById("view-simple"),
+  panel: document.getElementById("inspect-panel"),
   backdrop: document.getElementById("panel-backdrop"),
-  kbdList: document.getElementById("kbd-projects"),
-  staticSite: document.getElementById("static-site"),
+  roomName: document.getElementById("room-name"),
+  prompt: document.getElementById("interact-prompt"),
+  menu: document.getElementById("museum-menu"),
+  menuToggle: document.getElementById("menu-toggle"),
+  fullscreen: document.getElementById("fullscreen-toggle"),
+  sound: document.getElementById("sound-toggle"),
   go2d: document.getElementById("go-2d"),
   go3d: document.getElementById("go-3d"),
   srSwitch: document.getElementById("sr-switch-2d"),
 };
 
-let worldStarted = false;
-
+let museum = null;
+let museumStarted = false;
 let staticInited = false;
 
 function show2D() {
   if (els.loader) els.loader.hidden = true;
-  document.body.classList.remove("mode-3d");
+  if (els.entrance) els.entrance.hidden = true;
+  document.body.classList.remove("mode-3d", "in-museum");
   document.body.classList.add("mode-2d");
-  // Visibility is driven by the body class in CSS; just wire behaviour once.
   if (!staticInited) {
     initStaticSite(document);
     staticInited = true;
   }
 }
 
-async function start3D() {
+// Reveal the entrance screen (running the boot sequence the first time).
+async function showEntrance({ boot } = {}) {
   document.body.classList.remove("mode-2d");
   document.body.classList.add("mode-3d");
+  const { runBoot } = await import("./ui/overlay.js");
+  if (boot) await runBoot(els.loader);
+  else if (els.loader) els.loader.hidden = true;
+  if (els.entrance) els.entrance.hidden = false;
+}
 
-  const {
-    runLoader,
-    runTypewriter,
-    wireNav,
-    createProjectPanel,
-    buildKeyboardProjects,
-  } = await import("./ui/overlay.js");
-  const { createWorld } = await import("./three/world.js");
+async function enterMuseum() {
+  if (museumStarted) return;
+  if (els.entrance) els.entrance.hidden = true;
+  document.body.classList.remove("mode-2d");
+  document.body.classList.add("mode-3d", "in-museum");
 
-  await runLoader(els.loader);
+  const { createInspectPanel, wireMuseumHud } = await import("./ui/overlay.js");
+  const { createMuseum } = await import("./three/museum.js");
 
-  const world = createWorld(els.canvas, els.labelLayer, {
+  museum = createMuseum(els.canvas, els.labelLayer, {
     reducedMotion: prefersReducedMotion,
   });
-
-  wireNav(world, { navEl: els.nav, indicatorEl: els.indicator });
-  const panel = createProjectPanel(world, {
-    panelEl: els.panel,
-    backdropEl: els.backdrop,
+  createInspectPanel(museum, { panelEl: els.panel, backdropEl: els.backdrop });
+  wireMuseumHud(museum, {
+    roomName: els.roomName,
+    prompt: els.prompt,
+    menu: els.menu,
+    menuToggle: els.menuToggle,
+    fullscreen: els.fullscreen,
+    sound: els.sound,
   });
-  buildKeyboardProjects(world, els.kbdList, panel.open);
-
-  world.start();
-  worldStarted = true;
-  runTypewriter(els.typer);
+  museum.start();
+  museumStarted = true;
 }
 
-// ── mode selection ────────────────────────────
+// ── wiring ────────────────────────────────────
 const webgl = hasWebGL();
 
-if (els.go2d) {
-  els.go2d.addEventListener("click", (e) => {
-    e.preventDefault();
-    show2D();
-  });
-}
-// SR-only affordance: lets screen-reader / keyboard users jump to 2D before
-// the 3D canvas (WCAG 1.3.1, 2.4.1).
-if (els.srSwitch) {
-  els.srSwitch.addEventListener("click", () => show2D());
-}
+els.enter?.addEventListener("click", () => enterMuseum());
+els.viewSimple?.addEventListener("click", () => show2D());
+els.go2d?.addEventListener("click", (e) => {
+  e.preventDefault();
+  show2D();
+});
+els.srSwitch?.addEventListener("click", () => show2D());
 if (els.go3d) {
   els.go3d.addEventListener("click", (e) => {
     e.preventDefault();
-    if (!worldStarted) start3D();
+    if (!museumStarted) showEntrance({ boot: false });
   });
-  // Only offer "enter 3D" when it's actually available.
-  els.go3d.hidden = !webgl;
+  els.go3d.hidden = !webgl; // only offer "enter 3d" when usable
 }
 
+// ── mode selection ────────────────────────────
 if (!webgl) {
-  // No WebGL → static site is the only option.
   show2D();
   if (els.go2d) els.go2d.hidden = true;
 } else if (prefersReducedMotion) {
-  // Respect reduced motion: default to static, allow opting into 3D.
+  // Respect reduced motion: default to the static site, allow opting in.
   show2D();
 } else {
-  start3D();
+  showEntrance({ boot: true });
 }

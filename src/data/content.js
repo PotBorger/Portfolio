@@ -40,7 +40,7 @@ export const projects = [
     id: "typing-dungeon",
     file: "typing-dungeon.md",
     meta: "python · 172 tests",
-    shape: "icosahedron",
+    shape: "gear",
     accent: "#3b82f6",
     summary:
       "Terminal roguelike where typing speed and accuracy drive tactical combat across branching floors.",
@@ -57,7 +57,7 @@ export const projects = [
     id: "desktop-editor",
     file: "desktop-editor.md",
     meta: "pyside6 · 709 tests · 96% cov",
-    shape: "box",
+    shape: "nested",
     accent: "#60a5fa",
     summary:
       "Native code editor with multi-tab editing, split panes, drag-and-drop tabs, and save-state aware documents.",
@@ -72,8 +72,8 @@ export const projects = [
     id: "lms-platform",
     file: "lms-platform.md",
     meta: "c# · asp.net · mysql",
-    shape: "octahedron",
-    accent: "#2563eb",
+    shape: "saturn",
+    accent: "#3b82f6",
     summary:
       "Full-stack LMS with registration, courses, grading, GPA, and role-based access.",
     points: [
@@ -86,7 +86,7 @@ export const projects = [
     id: "sparky",
     file: "sparky.md",
     meta: "react · aws · sagemaker",
-    shape: "dodecahedron",
+    shape: "helix",
     accent: "#38bdf8",
     summary:
       "AI wildfire + air quality app turning live environmental data into risk predictions and health guidance.",
@@ -100,7 +100,7 @@ export const projects = [
     id: "treetable",
     file: "treetable.md",
     meta: "python · textual",
-    shape: "torus",
+    shape: "gear",
     accent: "#3b82f6",
     summary:
       "Terminal tool that renders deeply nested JSON as both tree and table for supercomputer datasets at SCI Institute.",
@@ -113,7 +113,7 @@ export const projects = [
     id: "sprite-editor",
     file: "sprite-editor.md",
     meta: "c++ · qt",
-    shape: "tetrahedron",
+    shape: "heart",
     accent: "#60a5fa",
     summary:
       "Desktop sprite editor with pixel drawing, real-time animation preview, and project save/load.",
@@ -125,8 +125,8 @@ export const projects = [
     id: "paintify",
     file: "paintify.md",
     meta: "kotlin · android · firebase",
-    shape: "cone",
-    accent: "#2563eb",
+    shape: "ufo",
+    accent: "#3b82f6",
     summary:
       "Android drawing app with a touch-optimized canvas, secure auth, cloud-backed artwork storage, and AI image analysis of user drawings.",
     points: [
@@ -211,6 +211,45 @@ export const contact = {
     { label: "github · /PotBorger", href: "https://github.com/PotBorger" },
     { label: "resume · pdf", href: "files/NOLAN MAI Resume.pdf" },
   ],
+};
+
+// ── Retro tech-museum model ───────────────────────────
+// Rooms the rail visits in order. `accent` tints the room + its plaques.
+export const rooms = [
+  { id: "lobby", name: "Entrance Lobby", accent: "#fbbf24" },
+  { id: "gallery", name: "Project Gallery", accent: "#34d399" },
+  { id: "skills", name: "Skills Lab", accent: "#60a5fa" },
+  { id: "about", name: "About Archive", accent: "#2dd4bf" },
+  { id: "experience", name: "Experience Hall", accent: "#e879f9" },
+  { id: "contact", name: "Contact Station", accent: "#fb7185" },
+];
+
+// Per-project exhibit presentation, merged onto `projects` by id in the 3D
+// layer. `modelType` selects a procedural retro model (crt | arcade |
+// server-rack for now); drop a GLB path in `modelPath` later to override.
+// REAL DATA: edit subtitle/year/status here; the rest comes from `projects`.
+export const exhibitMeta = {
+  "typing-dungeon": { modelType: "arcade", subtitle: "Type-to-fight roguelike", role: "Solo developer", year: "2024", status: "open source" },
+  "desktop-editor": { modelType: "crt", subtitle: "Native multi-tab code editor", role: "Solo developer", year: "2024", status: "private build" },
+  "lms-platform": { modelType: "server-rack", subtitle: "Full-stack learning platform", role: "Backend + DB", year: "2023", status: "open source" },
+  "sparky": { modelType: "server-rack", subtitle: "AI wildfire & air-quality app", role: "Full-stack + ML", year: "2024", status: "open source" },
+  "treetable": { modelType: "crt", subtitle: "Nested-JSON tree/table viewer", role: "Research engineer", year: "2024", status: "open source" },
+  "sprite-editor": { modelType: "crt", subtitle: "Pixel sprite editor", role: "Team of 2", year: "2023", status: "coursework" },
+  "paintify": { modelType: "crt", subtitle: "Android drawing app + AI", role: "Solo developer", year: "2024", status: "open source" },
+  "snake-multiplayer": { modelType: "arcade", subtitle: "Authoritative multiplayer snake", role: "Networking + DB", year: "2023", status: "course project" },
+};
+
+// Museum "wings": one themed exhibit hall per station. `gel` is the hall's
+// lighting accent used in the 3D world (room walls, columns, fill light,
+// placard stripe); `gelDeep` is the AA-safe variant for ink-on-light use in
+// the 2D fallback. `hall`/`name` drive wayfinding (floor directory + indicator).
+export const wings = {
+  hero: { hall: 0, name: "The Atrium", short: "Atrium", gel: "#fbbf24", gelDeep: "#92400e" },
+  about: { hall: 1, name: "The Bench", short: "Bench", gel: "#2dd4bf", gelDeep: "#0f766e" },
+  projects: { hall: 2, name: "Work Gallery", short: "Gallery", gel: "#e879f9", gelDeep: "#a21caf" },
+  experience: { hall: 3, name: "Career Timeline", short: "Timeline", gel: "#34d399", gelDeep: "#047857" },
+  stack: { hall: 4, name: "The Toolwall", short: "Toolwall", gel: "#60a5fa", gelDeep: "#1e3a8a" },
+  contact: { hall: 5, name: "The Beacon", short: "Beacon", gel: "#fb7185", gelDeep: "#be123c" },
 };
 
 // Section order = the order the camera visits "stations".
