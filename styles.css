@@ -791,3 +791,607 @@ h3 {
     transition: none;
   }
 }
+
+/* ════════════════════════════════════════════════
+   3D "Blueprint Space" layer
+   ════════════════════════════════════════════════ */
+:root {
+  --void: #070e24;
+  --grid: #1e2a52;
+  --glass: #9ec5ff;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Visually hidden until focused; reveals a skip-style affordance for SR/keyboard
+   users to escape the 3D layer (WCAG 2.4.1, 1.3.1). */
+.sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  font: inherit;
+}
+.sr-only-focusable:focus-visible {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+  padding: 0.6rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--term-bg);
+  color: var(--term-text);
+  border: 2px solid var(--accent-hot);
+  outline: none;
+  z-index: 200;
+  font-size: 0.9rem;
+}
+
+/* ── mode visibility ─────────────────────────────
+   No-JS users see the static site. With JS we hide it until a mode is
+   chosen, then the body class decides what shows. */
+#app-3d {
+  display: none;
+}
+.js #static-site {
+  display: none;
+}
+body.mode-2d #static-site {
+  display: block;
+}
+body.mode-3d #app-3d {
+  display: block;
+}
+body.mode-3d #static-site {
+  display: none;
+}
+body.mode-3d {
+  background: var(--void);
+  overflow: hidden;
+}
+
+/* ── canvas + label layer ────────────────────────── */
+#scene-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  cursor: grab;
+}
+
+.label-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scene-label {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--glass);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 8px rgba(7, 14, 36, 0.9);
+}
+
+.scene-label.label-callout {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  background: rgba(7, 14, 36, 0.55);
+  color: var(--accent-hot);
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.scene-label.label-callout.is-hot {
+  color: #fff;
+  border-color: var(--accent-hot);
+  background: rgba(30, 58, 138, 0.6);
+}
+
+.scene-label.label-lead {
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--term-text);
+  max-width: 22ch;
+  white-space: normal;
+  text-align: center;
+}
+
+.scene-label.label-node {
+  color: var(--term-text);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.scene-label.label-stack {
+  color: var(--term-dim);
+  text-transform: none;
+}
+
+/* ── HUD frame (corner brackets) ─────────────────── */
+.hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(96, 165, 250, 0.55);
+}
+.hud-corner.tl {
+  top: 18px;
+  left: 18px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.hud-corner.tr {
+  top: 18px;
+  right: 18px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.hud-corner.bl {
+  bottom: 18px;
+  left: 18px;
+  border-right: 0;
+  border-top: 0;
+}
+.hud-corner.br {
+  bottom: 18px;
+  right: 18px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* ── scene topbar + nav ──────────────────────────── */
+.scene-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 2.4rem;
+  color: var(--term-text);
+}
+
+.scene-topbar .brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--term-text);
+}
+.scene-topbar .brand::before {
+  content: "▍ ";
+  color: var(--accent-hot);
+}
+
+.scene-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.scene-nav a {
+  color: var(--term-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 160ms ease;
+}
+.scene-nav a:hover,
+.scene-nav a[data-current] {
+  color: var(--term-text);
+}
+.scene-nav a:focus-visible,
+.scene-topbar .brand:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
+.scene-nav a[data-current]::before {
+  content: "· ";
+  color: var(--accent-hot);
+}
+
+.scene-nav .nav-cta {
+  /* --accent-hot (#3b82f6) reaches ≥ 3:1 against --void; --accent did not (SC 1.4.11). */
+  border: 1px solid var(--accent-hot);
+  padding: 0.3rem 0.6rem;
+  color: var(--term-text);
+}
+
+.mode-toggle {
+  font: inherit;
+  font-size: 0.82rem;
+  color: var(--term-dim);
+  background: transparent;
+  /* Raised opacity so the border reaches ≥ 3:1 against --void (SC 1.4.11). */
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.mode-toggle:hover {
+  color: var(--term-text);
+  border-color: var(--accent-hot);
+}
+.mode-toggle:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
+
+/* ── hero overlay ────────────────────────────────── */
+.hero-overlay {
+  position: fixed;
+  left: 2.4rem;
+  bottom: 2.4rem;
+  z-index: 8;
+  max-width: 460px;
+  display: grid;
+  gap: 1rem;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+/* hero terminal only belongs to the hero station */
+body.off-hero .hero-overlay {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ── contact overlay (only at the contact station) ── */
+.contact-overlay {
+  position: fixed;
+  left: 50%;
+  bottom: 12vh;
+  transform: translateX(-50%);
+  z-index: 8;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease;
+}
+body.at-contact .contact-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.contact-overlay-prompt {
+  margin: 0;
+  color: var(--term-prompt);
+  font-size: 0.85rem;
+}
+.contact-overlay-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  max-width: 640px;
+}
+.contact-overlay-links a {
+  border: 1px solid var(--accent-hot);
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+  color: var(--term-text);
+  font-size: 0.9rem;
+  background: rgba(7, 14, 36, 0.6);
+  transition: background 160ms ease;
+}
+.contact-overlay-links a::before {
+  content: "→ ";
+  color: var(--accent-hot);
+}
+.contact-overlay-links a:hover {
+  background: rgba(30, 58, 138, 0.6);
+}
+.contact-overlay-links a:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
+.hero-overlay .ascii-logo {
+  color: var(--term-text);
+  margin: 0;
+  font-size: clamp(0.5rem, 1.2vw, 0.85rem);
+  text-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+.hero-overlay .terminal-window {
+  pointer-events: auto;
+  max-width: 420px;
+}
+.hero-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--term-dim);
+}
+
+/* ── station indicator ───────────────────────────── */
+.station-indicator {
+  position: fixed;
+  right: 2.4rem;
+  bottom: 2.4rem;
+  z-index: 8;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--term-dim);
+}
+
+/* ── keyboard access list ────────────────────────── */
+.kbd-access {
+  position: fixed;
+  top: 5rem;
+  left: 2.4rem;
+  z-index: 9;
+  display: grid;
+  gap: 0.3rem;
+  max-width: 280px;
+  /* Visible on keyboard focus within; off-screen otherwise. */
+  opacity: 0;
+  transform: translateX(-120%);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.kbd-access:focus-within {
+  opacity: 1;
+  transform: translateX(0);
+}
+.kbd-project {
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  color: var(--term-text);
+  background: rgba(10, 21, 50, 0.9);
+  border: 1px solid var(--accent);
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+.kbd-project:hover,
+.kbd-project:focus-visible {
+  background: rgba(30, 58, 138, 0.8);
+  outline: 2px solid var(--accent-hot);
+}
+
+/* ── project panel + backdrop ────────────────────── */
+.panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(7, 14, 36, 0.55);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.panel-backdrop.is-open {
+  opacity: 1;
+}
+
+.project-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 31;
+  width: min(440px, 92vw);
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--term-bg);
+  color: var(--term-text);
+  border-left: 2px solid var(--accent-hot);
+  box-shadow: -12px 0 40px rgba(7, 14, 36, 0.6);
+  padding: 4rem 1.8rem 2rem;
+  transform: translateX(100%);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-panel.is-open {
+  transform: translateX(0);
+}
+/* corner brackets on the panel keep the neo-brutalist DNA */
+.project-panel::before,
+.project-panel::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--accent);
+}
+.project-panel::before {
+  top: 16px;
+  left: 16px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.project-panel::after {
+  bottom: 16px;
+  right: 16px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.panel-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--term-prompt);
+  background: transparent;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+}
+.panel-close:hover {
+  border-color: var(--term-prompt);
+}
+.panel-close:focus-visible {
+  outline: 2px solid var(--term-prompt);
+  outline-offset: 2px;
+}
+
+.panel-head {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+.panel-cmd {
+  color: var(--accent-hot);
+}
+.panel-file {
+  font-weight: 700;
+}
+.panel-meta {
+  color: var(--term-dim);
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+.panel-summary {
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+.panel-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.panel-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--term-text);
+}
+.panel-list li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent-hot);
+}
+.panel-tag {
+  display: inline-block;
+  border: 1px dashed rgba(148, 163, 184, 0.5);
+  padding: 0.35rem 0.6rem;
+  color: var(--term-dim);
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+}
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.panel-link {
+  border: 1px solid var(--accent);
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+  color: var(--term-text);
+  font-size: 0.9rem;
+  transition: background 160ms ease;
+}
+.panel-link::before {
+  content: "▸ ";
+  color: var(--accent-hot);
+}
+.panel-link:hover {
+  background: rgba(30, 58, 138, 0.6);
+}
+.panel-link:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
+
+/* ── terminal boot loader ────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: var(--void);
+  transition: opacity 480ms ease;
+}
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+/* The `hidden` attribute must win over `.loader { display: grid }`, otherwise
+   the finished loader stays as an invisible full-screen click blocker. */
+.loader[hidden] {
+  display: none;
+}
+.loader-window {
+  width: min(420px, 86vw);
+  border: 1px solid var(--accent);
+  background: var(--term-bg);
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.25);
+}
+.loader-log {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--term-cmd);
+  white-space: pre-wrap;
+  min-height: 7.5rem;
+}
+.loader-log p {
+  margin: 0 0 0.3rem;
+}
+
+/* loader only matters in 3D mode */
+body.mode-2d .loader {
+  display: none;
+}
+
+/* ── responsive (3D) ─────────────────────────────── */
+@media (max-width: 760px) {
+  .scene-topbar {
+    padding: 1rem 1.2rem;
+  }
+  .hero-overlay {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    max-width: none;
+  }
+  .station-indicator {
+    right: 1.2rem;
+    bottom: 6.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-panel,
+  .panel-backdrop,
+  .loader {
+    transition: none;
+  }
+}
