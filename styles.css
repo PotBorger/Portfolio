@@ -1341,6 +1341,12 @@ body.at-contact .contact-overlay {
 }
 .loader.is-done {
   opacity: 0;
+  pointer-events: none;
+}
+/* The `hidden` attribute must win over `.loader { display: grid }`, otherwise
+   the finished loader stays as an invisible full-screen click blocker. */
+.loader[hidden] {
+  display: none;
 }
 .loader-window {
   width: min(420px, 86vw);
