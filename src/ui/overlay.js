@@ -141,6 +141,8 @@ export function wireNav(world, { navEl, indicatorEl }) {
     if (indicatorEl) indicatorEl.textContent = `station ${index + 1}/6 · ${id}`;
     // The hero terminal overlay only belongs to the hero station.
     document.body.classList.toggle("off-hero", index !== 0);
+    // The contact links overlay only belongs to the contact station (last).
+    document.body.classList.toggle("at-contact", id === "contact");
   });
 }
 

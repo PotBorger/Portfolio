@@ -45,8 +45,8 @@ function buildStations() {
     { id: "hero", focus: new THREE.Vector3(0, 0, 0), radius: 11, theta: 0, phi: Math.PI / 2 },
     { id: "about", focus: new THREE.Vector3(0, 0, -26), radius: 9, theta: 0.35, phi: 1.45 },
     { id: "projects", focus: new THREE.Vector3(0, 0, -54), radius: 13, theta: 0, phi: 1.5 },
-    { id: "experience", focus: new THREE.Vector3(0, -1, -86), radius: 12, theta: -0.4, phi: 1.4 },
-    { id: "stack", focus: new THREE.Vector3(0, 0, -116), radius: 10, theta: 0.3, phi: 1.5 },
+    { id: "experience", focus: new THREE.Vector3(0, 0, -86), radius: 15, theta: -0.2, phi: 1.42 },
+    { id: "stack", focus: new THREE.Vector3(0, 1, -116), radius: 12, theta: 0.3, phi: 1.36 },
     { id: "contact", focus: new THREE.Vector3(0, 0, -142), radius: 9, theta: 0, phi: 1.5 },
   ];
 }
@@ -182,11 +182,11 @@ export function createWorld(canvas, labelLayer, options = {}) {
   let prevPoint = null;
   experience.forEach((role, i) => {
     const p = new THREE.Vector3(
-      expFocus.x - 5 + i * 2.5,
-      expFocus.y + 3 - i * 1.5,
-      expFocus.z + 4 - i * 2
+      expFocus.x - 4.5 + i * 2.25,
+      expFocus.y + 2.2 - i * 1.1,
+      expFocus.z + 3 - i * 1.5
     );
-    const n = node(i === 0 ? "#60a5fa" : "#3b82f6", i === 0 ? 0.6 : 0.42);
+    const n = node(i === 0 ? "#60a5fa" : "#3b82f6", i === 0 ? 0.5 : 0.4);
     n.position.copy(p);
     scene.add(n);
     const label = mk(role.role, "label-node");
@@ -205,7 +205,7 @@ export function createWorld(canvas, labelLayer, options = {}) {
     const r = ring(1.4 + i * 1.1, i % 2 === 0 ? "#3b82f6" : "#60a5fa");
     stackGroup.add(r);
     const label = mk(`${row.label} → ${row.value}`, "label-stack");
-    label.position.set(0, 1.4 + i * 1.1, 0);
+    label.position.set(0, 0.6 + i * 0.6, 0);
     stackGroup.add(label);
   });
   scene.add(stackGroup);

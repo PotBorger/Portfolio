@@ -1071,6 +1071,58 @@ body.off-hero .hero-overlay {
   opacity: 0;
   visibility: hidden;
 }
+
+/* ── contact overlay (only at the contact station) ── */
+.contact-overlay {
+  position: fixed;
+  left: 50%;
+  bottom: 12vh;
+  transform: translateX(-50%);
+  z-index: 8;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease;
+}
+body.at-contact .contact-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+.contact-overlay-prompt {
+  margin: 0;
+  color: var(--term-prompt);
+  font-size: 0.85rem;
+}
+.contact-overlay-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  max-width: 640px;
+}
+.contact-overlay-links a {
+  border: 1px solid var(--accent-hot);
+  padding: 0.5rem 0.8rem;
+  text-decoration: none;
+  color: var(--term-text);
+  font-size: 0.9rem;
+  background: rgba(7, 14, 36, 0.6);
+  transition: background 160ms ease;
+}
+.contact-overlay-links a::before {
+  content: "→ ";
+  color: var(--accent-hot);
+}
+.contact-overlay-links a:hover {
+  background: rgba(30, 58, 138, 0.6);
+}
+.contact-overlay-links a:focus-visible {
+  outline: 2px solid var(--accent-hot);
+  outline-offset: 2px;
+}
 .hero-overlay .ascii-logo {
   color: var(--term-text);
   margin: 0;
