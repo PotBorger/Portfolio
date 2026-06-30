@@ -6,7 +6,7 @@
     <title>Nolan Mai | Software Engineer</title>
     <meta
       name="description"
-      content="ASCII-style portfolio for Nolan Mai — software engineer working on data tools, dev tooling, and clean interfaces."
+      content="Immersive 3D portfolio for Nolan Mai — software engineer working on data tools, dev tooling, and clean interfaces."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,446 +16,461 @@
     />
     <link
       rel="icon"
-      href="images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg"
+      href="/images/13c0e633-1b45-4ff6-88c9-b564bbac0aee.jpg"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <!-- Flag JS early so CSS can hide the static fallback before the mode is chosen. -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script type="module" src="/src/main.js"></script>
   </head>
-  <body>
+  <body class="mode-2d">
     <a class="skip-link" href="#content">Skip to content</a>
 
-    <div class="page-shell">
-      <header class="topbar panel" id="top">
-        <div class="shell-bar" aria-hidden="true">
-          <span>nolan@portfolio</span>
-          <span>~/ascii-site</span>
-          <span class="pulse"><span class="live-dot">●</span>online</span>
-        </div>
+    <!-- ── terminal boot loader ─────────────────────────── -->
+    <div id="loader" class="loader" aria-hidden="true">
+      <div class="loader-window">
+        <div class="loader-log"></div>
+      </div>
+    </div>
 
-        <div class="topbar-inner">
-          <a class="brand" href="#top">nolan_mai</a>
-          <nav class="site-nav" aria-label="Primary">
-            <a href="#about">about</a>
-            <a href="#projects">work</a>
-            <a href="#experience">exp</a>
-            <a href="#stack">stack</a>
-            <a href="#contact">contact</a>
-            <a
-              class="nav-cta"
-              href="files/NOLAN MAI Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              >resume.pdf →</a
-            >
-          </nav>
-        </div>
+    <!-- ── immersive 3D world ───────────────────────────── -->
+    <div id="app-3d">
+      <!-- SR shortcut: screen-reader / keyboard users can bail to the richer
+           text version before encountering the inaccessible 3D canvas.
+           Wired in main.js to the same handler as #go-2d. -->
+      <button id="sr-switch-2d" class="sr-only-focusable" type="button">
+        Switch to accessible text version
+      </button>
+      <canvas id="scene-canvas" aria-hidden="true"></canvas>
+      <div id="label-layer" class="label-layer" aria-hidden="true"></div>
+
+      <!-- HUD frame -->
+      <div class="hud" aria-hidden="true">
+        <span class="hud-corner tl"></span>
+        <span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span>
+        <span class="hud-corner br"></span>
+      </div>
+
+      <header class="scene-topbar">
+        <a class="brand" href="#" data-station="hero">nolan_mai</a>
+        <nav id="scene-nav" class="scene-nav" aria-label="Stations">
+          <a href="#" data-station="about">about</a>
+          <a href="#" data-station="projects">work</a>
+          <a href="#" data-station="experience">exp</a>
+          <a href="#" data-station="stack">stack</a>
+          <a href="#" data-station="contact">contact</a>
+          <a
+            class="nav-cta"
+            href="files/NOLAN MAI Resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            >resume.pdf →</a
+          >
+        </nav>
+        <button id="go-2d" class="mode-toggle" type="button">[ 2d mode ]</button>
       </header>
 
-      <main id="content">
-        <section class="panel hero reveal is-visible">
-          <pre class="ascii-logo" aria-hidden="true">
+      <!-- hero overlay keeps the terminal identity -->
+      <section class="hero-overlay">
+        <pre class="ascii-logo" aria-hidden="true">
  _   _       _
 | \ | | ___ | | __ _ _ __
 |  \| |/ _ \| |/ _` | '_ \
 | |\  | (_) | | (_| | | | |
 |_| \_|\___/|_|\__,_|_| |_|
-          </pre>
-
-          <div class="terminal-window" aria-label="Intro terminal">
-            <div class="term-header">
-              <span class="dot dot-r"></span>
-              <span class="dot dot-y"></span>
-              <span class="dot dot-g"></span>
-              <span class="term-title">nolan@portfolio — zsh</span>
-            </div>
-            <div class="term-body" id="typer" aria-live="polite">
-              <noscript>
-                <p>$ whoami</p>
-                <p>nolan mai — software engineer.</p>
-                <p>$ cat focus.txt</p>
-                <p>data-heavy tools. clear interfaces. messy problems made usable.</p>
-                <p>$ ls status/</p>
-                <p>interning @ fpt is — building an mcp system</p>
-                <p>b.s. cs · university of utah · may 2027</p>
-              </noscript>
-            </div>
+        </pre>
+        <div class="terminal-window" aria-label="Intro terminal">
+          <div class="term-header">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span class="term-title">nolan@portfolio — zsh</span>
           </div>
+          <div class="term-body" id="typer" aria-live="polite"></div>
+        </div>
+        <p class="hero-hint">drag to look · scroll the nav · click a solid</p>
+      </section>
 
-          <div class="hero-actions">
-            <a class="btn-primary" href="#projects">view work →</a>
-            <a
-              href="files/NOLAN MAI Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              >open resume</a
-            >
-            <a href="mailto:nolanmai1811@gmail.com">say hi</a>
+      <div class="station-indicator" id="station-indicator" aria-hidden="true">
+        station 1/6 · hero
+      </div>
+
+      <!-- hidden keyboard path to the project solids -->
+      <nav class="kbd-access" aria-label="Projects (keyboard)">
+        <h2 class="visually-hidden">Open a project</h2>
+        <div id="kbd-projects"></div>
+      </nav>
+
+      <!-- project detail panel -->
+      <div id="panel-backdrop" class="panel-backdrop" hidden></div>
+      <aside
+        id="project-panel"
+        class="project-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project detail"
+        hidden
+      >
+        <button class="panel-close" type="button" aria-label="Close project">
+          [ esc ]
+        </button>
+        <div class="panel-body"></div>
+      </aside>
+    </div>
+
+    <!-- ── static 2D fallback (no-WebGL / reduced-motion / SEO / no-JS) ── -->
+    <div id="static-site" class="static-site">
+      <div class="page-shell">
+        <header class="topbar panel" id="top">
+          <div class="shell-bar" aria-hidden="true">
+            <span>nolan@portfolio</span>
+            <span>~/portfolio</span>
+            <span class="pulse"><span class="live-dot">●</span>online</span>
           </div>
-        </section>
-
-        <section class="panel reveal" id="about">
-          <div class="section-head">
-            <p class="prompt">$ cat about.md</p>
-            <h2>about</h2>
-          </div>
-
-          <p class="lead">
-            I build readable systems out of messy data.
-          </p>
-          <p class="muted-copy">
-            CS @ University of Utah (May 2027). Currently at FPT IS
-            building an MCP (Model Context Protocol) system that connects
-            internal tooling to AI assistants. Past work spans research
-            dashboards, mobile health flows, and native desktop tooling.
-          </p>
-
-          <ul class="tag-row">
-            <li>dev tooling</li>
-            <li>data viz</li>
-            <li>full-stack</li>
-            <li>llm pipelines</li>
-            <li>readable systems</li>
-          </ul>
-        </section>
-
-        <section class="panel reveal" id="projects">
-          <div class="section-head">
-            <p class="prompt">$ ls -1 projects/</p>
-            <h2>selected work</h2>
-          </div>
-
-          <ul class="project-list">
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">typing-dungeon.md</span>
-                <span class="meta-inline">python · 172 tests</span>
-                <span class="toggle">[+]</span>
+          <div class="topbar-inner">
+            <a class="brand" href="#top">nolan_mai</a>
+            <nav class="site-nav static-nav" aria-label="Primary">
+              <a href="#about">about</a>
+              <a href="#projects">work</a>
+              <a href="#experience">exp</a>
+              <a href="#stack">stack</a>
+              <a href="#contact">contact</a>
+              <button id="go-3d" class="mode-toggle nav-cta" type="button">
+                enter 3d →
               </button>
-              <div class="project-body" hidden>
-                <p>
-                  Terminal roguelike where typing speed and accuracy drive
-                  tactical combat across branching floors.
-                </p>
-                <ul class="ascii-list">
-                  <li>Combat layers: intent, poise, stagger, feint interrupts, quickstep, word debuffs.</li>
-                  <li>JSON saves, top-10 leaderboard, audio cues, 172 passing tests.</li>
-                </ul>
-                <div class="card-actions">
-                  <a
-                    class="card-link"
-                    href="https://github.com/PotBorger/typing-dungeon"
-                    target="_blank"
-                    rel="noreferrer"
-                    >repo</a
-                  >
-                  <a
-                    class="card-link"
-                    href="https://youtu.be/QtAxXzygokw"
-                    target="_blank"
-                    rel="noreferrer"
-                    >gameplay</a
-                  >
+              <a
+                class="nav-cta"
+                href="files/NOLAN MAI Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                >resume.pdf →</a
+              >
+            </nav>
+          </div>
+        </header>
+
+        <main id="content">
+          <section class="panel hero reveal is-visible">
+            <pre class="ascii-logo" aria-hidden="true">
+ _   _       _
+| \ | | ___ | | __ _ _ __
+|  \| |/ _ \| |/ _` | '_ \
+| |\  | (_) | | (_| | | | |
+|_| \_|\___/|_|\__,_|_| |_|
+            </pre>
+            <p class="lead">nolan mai — software engineer.</p>
+            <p class="muted-copy">
+              data-heavy tools. clear interfaces. messy problems made usable.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="#projects">view work →</a>
+              <a href="files/NOLAN MAI Resume.pdf" target="_blank" rel="noreferrer"
+                >open resume</a
+              >
+              <a href="mailto:nolanmai1811@gmail.com">say hi</a>
+            </div>
+          </section>
+
+          <section class="panel reveal" id="about">
+            <div class="section-head">
+              <p class="prompt">$ cat about.md</p>
+              <h2>about</h2>
+            </div>
+            <p class="lead">I build readable systems out of messy data.</p>
+            <p class="muted-copy">
+              CS @ University of Utah (May 2027). Currently at FPT IS building an
+              MCP (Model Context Protocol) system that connects internal tooling
+              to AI assistants. Past work spans research dashboards, mobile health
+              flows, and native desktop tooling.
+            </p>
+            <ul class="tag-row">
+              <li>dev tooling</li>
+              <li>data viz</li>
+              <li>full-stack</li>
+              <li>llm pipelines</li>
+              <li>readable systems</li>
+            </ul>
+          </section>
+
+          <section class="panel reveal" id="projects">
+            <div class="section-head">
+              <p class="prompt">$ ls -1 projects/</p>
+              <h2>selected work</h2>
+            </div>
+            <ul class="project-list">
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">typing-dungeon.md</span>
+                  <span class="meta-inline">python · 172 tests</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Terminal roguelike where typing speed and accuracy drive
+                    tactical combat across branching floors.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>Combat layers: intent, poise, stagger, feint interrupts, quickstep, word debuffs.</li>
+                    <li>JSON saves, top-10 leaderboard, audio cues, 172 passing tests.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="card-link" href="https://github.com/PotBorger/typing-dungeon" target="_blank" rel="noreferrer">repo</a>
+                    <a class="card-link" href="https://youtu.be/QtAxXzygokw" target="_blank" rel="noreferrer">gameplay</a>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">desktop-editor.md</span>
-                <span class="meta-inline">pyside6 · 709 tests · 96% cov</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Native code editor with multi-tab editing, split panes,
-                  drag-and-drop tabs, and save-state aware documents.
-                </p>
-                <ul class="ascii-list">
-                  <li>6.1K+ lines focused on real developer workflows.</li>
-                  <li>99.9% faster large-file open, 99.6% faster replace-all on profiled workloads.</li>
-                </ul>
-                <span class="card-tag">private build · demo on request</span>
-              </div>
-            </li>
-
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">lms-platform.md</span>
-                <span class="meta-inline">c# · asp.net · mysql</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Full-stack LMS with registration, courses, grading, GPA,
-                  and role-based access.
-                </p>
-                <ul class="ascii-list">
-                  <li>24+ controller actions across the end-to-end flow.</li>
-                  <li>Weighted grade recalculation across 10 relational entities.</li>
-                </ul>
-                <div class="card-actions">
-                  <a
-                    class="card-link"
-                    href="https://github.com/PotBorger/DB-System-LMS"
-                    target="_blank"
-                    rel="noreferrer"
-                    >repo</a
-                  >
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">desktop-editor.md</span>
+                  <span class="meta-inline">pyside6 · 709 tests · 96% cov</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Native code editor with multi-tab editing, split panes,
+                    drag-and-drop tabs, and save-state aware documents.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>6.1K+ lines focused on real developer workflows.</li>
+                    <li>99.9% faster large-file open, 99.6% faster replace-all on profiled workloads.</li>
+                  </ul>
+                  <span class="card-tag">private build · demo on request</span>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">sparky.md</span>
-                <span class="meta-inline">react · aws · sagemaker</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  AI wildfire + air quality app turning live environmental
-                  data into risk predictions and health guidance.
-                </p>
-                <ul class="ascii-list">
-                  <li>SageMaker model deployed at 78.6% accuracy.</li>
-                  <li>Personalized advisories via AWS Bedrock, map views for 50+ locations.</li>
-                </ul>
-                <div class="card-actions">
-                  <a
-                    class="card-link"
-                    href="https://github.com/PotBorger/sParky"
-                    target="_blank"
-                    rel="noreferrer"
-                    >repo</a
-                  >
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">lms-platform.md</span>
+                  <span class="meta-inline">c# · asp.net · mysql</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Full-stack LMS with registration, courses, grading, GPA, and
+                    role-based access.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>24+ controller actions across the end-to-end flow.</li>
+                    <li>Weighted grade recalculation across 10 relational entities.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="card-link" href="https://github.com/PotBorger/DB-System-LMS" target="_blank" rel="noreferrer">repo</a>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">treetable.md</span>
-                <span class="meta-inline">python · textual</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Terminal tool that renders deeply nested JSON as both tree
-                  and table for supercomputer datasets at SCI Institute.
-                </p>
-                <div class="card-actions">
-                  <a
-                    class="card-link"
-                    href="https://github.com/PotBorger/Independent-Study-SCI"
-                    target="_blank"
-                    rel="noreferrer"
-                    >repo</a
-                  >
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">sparky.md</span>
+                  <span class="meta-inline">react · aws · sagemaker</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    AI wildfire + air quality app turning live environmental data
+                    into risk predictions and health guidance.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>SageMaker model deployed at 78.6% accuracy.</li>
+                    <li>Personalized advisories via AWS Bedrock, map views for 50+ locations.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="card-link" href="https://github.com/PotBorger/sParky" target="_blank" rel="noreferrer">repo</a>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">sprite-editor.md</span>
-                <span class="meta-inline">c++ · qt</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Desktop sprite editor with pixel drawing, real-time
-                  animation preview, and project save/load.
-                </p>
-                <span class="card-tag">coursework · demo on request</span>
-              </div>
-            </li>
-
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">paintify.md</span>
-                <span class="meta-inline">kotlin · android · firebase</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Android drawing app with a touch-optimized canvas, secure
-                  auth, cloud-backed artwork storage, and AI image analysis
-                  of user drawings.
-                </p>
-                <ul class="ascii-list">
-                  <li>Firebase Auth + Firestore for persistent sessions and per-user artwork.</li>
-                  <li>AI-driven insight pass over saved drawings.</li>
-                </ul>
-                <div class="card-actions">
-                  <a
-                    class="card-link"
-                    href="https://github.com/PotBorger/Paintify"
-                    target="_blank"
-                    rel="noreferrer"
-                    >repo</a
-                  >
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">treetable.md</span>
+                  <span class="meta-inline">python · textual</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Terminal tool that renders deeply nested JSON as both tree and
+                    table for supercomputer datasets at SCI Institute.
+                  </p>
+                  <div class="card-actions">
+                    <a class="card-link" href="https://github.com/PotBorger/Independent-Study-SCI" target="_blank" rel="noreferrer">repo</a>
+                  </div>
                 </div>
-              </div>
-            </li>
+              </li>
 
-            <li class="project">
-              <button class="project-trigger" type="button" aria-expanded="false">
-                <span class="cmd">$ cat</span>
-                <span class="file">snake-multiplayer.md</span>
-                <span class="meta-inline">c# · asp.net · blazor · sql server</span>
-                <span class="toggle">[+]</span>
-              </button>
-              <div class="project-body" hidden>
-                <p>
-                  Multiplayer client–server snake in C# with an ASP.NET
-                  backend and Blazor UI, holding authoritative game state
-                  for 25 concurrent players.
-                </p>
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">sprite-editor.md</span>
+                  <span class="meta-inline">c++ · qt</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Desktop sprite editor with pixel drawing, real-time animation
+                    preview, and project save/load.
+                  </p>
+                  <span class="card-tag">coursework · demo on request</span>
+                </div>
+              </li>
+
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">paintify.md</span>
+                  <span class="meta-inline">kotlin · android · firebase</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Android drawing app with a touch-optimized canvas, secure
+                    auth, cloud-backed artwork storage, and AI image analysis of
+                    user drawings.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>Firebase Auth + Firestore for persistent sessions and per-user artwork.</li>
+                    <li>AI-driven insight pass over saved drawings.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="card-link" href="https://github.com/PotBorger/Paintify" target="_blank" rel="noreferrer">repo</a>
+                  </div>
+                </div>
+              </li>
+
+              <li class="project">
+                <button class="project-trigger" type="button" aria-expanded="false">
+                  <span class="cmd">$ cat</span>
+                  <span class="file">snake-multiplayer.md</span>
+                  <span class="meta-inline">c# · asp.net · blazor · sql server</span>
+                  <span class="toggle">[+]</span>
+                </button>
+                <div class="project-body" hidden>
+                  <p>
+                    Multiplayer client–server snake in C# with an ASP.NET backend
+                    and Blazor UI, holding authoritative game state for 25
+                    concurrent players.
+                  </p>
+                  <ul class="ascii-list">
+                    <li>Event-driven real-time sync with disconnect / reconnect handling.</li>
+                    <li>SQL Server leaderboard + session tracking with parameterized CRUD and indexing — 40% lower query latency.</li>
+                  </ul>
+                  <span class="card-tag">course project</span>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <section class="panel reveal" id="experience">
+            <div class="section-head">
+              <p class="prompt">$ git log --author=nolan</p>
+              <h2>experience</h2>
+            </div>
+            <ol class="timeline">
+              <li class="timeline-item">
+                <div class="timeline-head">
+                  <h3>SWE Intern · FPT IS</h3>
+                  <span class="date">2026 – Present</span>
+                </div>
                 <ul class="ascii-list">
-                  <li>Event-driven real-time sync with disconnect / reconnect handling.</li>
-                  <li>SQL Server leaderboard + session tracking with parameterized CRUD and indexing — 40% lower query latency.</li>
+                  <li>Building an MCP (Model Context Protocol) system that connects internal tooling to AI assistants.</li>
                 </ul>
-                <span class="card-tag">course project</span>
-              </div>
-            </li>
-          </ul>
-        </section>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-head">
+                  <h3>SWE Intern · Select Portfolio Servicing</h3>
+                  <span class="date">Sep – Dec 2025</span>
+                </div>
+                <ul class="ascii-list">
+                  <li>Built a Python static analysis platform for legacy C# across 10+ projects.</li>
+                  <li>React Flow architecture explorer cut manual code tracing from hours to minutes.</li>
+                  <li>Wired a local LLM pipeline for consistent business-level docs.</li>
+                </ul>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-head">
+                  <h3>Research Engineer · SCI Institute, U of U</h3>
+                  <span class="date">Aug 2024 – Dec 2025</span>
+                </div>
+                <ul class="ascii-list">
+                  <li>Built D3 / SvelteKit dashboards for computer-architecture experiments.</li>
+                  <li>Cut analysis turnaround 80% and lifted render throughput 20%.</li>
+                </ul>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-head">
+                  <h3>Fullstack Intern · InCaria</h3>
+                  <span class="date">Jan – May 2025</span>
+                </div>
+                <ul class="ascii-list">
+                  <li>Shipped React Native + TS flows worth ~20% of MVP completion.</li>
+                  <li>Wired the app to a Django + Postgres backend over REST.</li>
+                </ul>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-head">
+                  <h3>SWE Intern · SENTECHS</h3>
+                  <span class="date">Jun – Aug 2024</span>
+                </div>
+                <ul class="ascii-list">
+                  <li>API-driven IELTS passage analysis tool, MongoDB vocab pipeline feeding an LLM workflow.</li>
+                  <li>REST endpoints handling 2,000+ daily queries.</li>
+                </ul>
+              </li>
+            </ol>
+          </section>
 
-        <section class="panel reveal" id="experience">
-          <div class="section-head">
-            <p class="prompt">$ git log --author=nolan</p>
-            <h2>experience</h2>
-          </div>
-
-          <ol class="timeline">
-            <li class="timeline-item">
-              <div class="timeline-head">
-                <h3>SWE Intern · FPT IS</h3>
-                <span class="date">2026 – Present</span>
-              </div>
-              <ul class="ascii-list">
-                <li>Building an MCP (Model Context Protocol) system that connects internal tooling to AI assistants.</li>
-              </ul>
-            </li>
-
-            <li class="timeline-item">
-              <div class="timeline-head">
-                <h3>SWE Intern · Select Portfolio Servicing</h3>
-                <span class="date">Sep – Dec 2025</span>
-              </div>
-              <ul class="ascii-list">
-                <li>Built a Python static analysis platform for legacy C# across 10+ projects.</li>
-                <li>React Flow architecture explorer cut manual code tracing from hours to minutes.</li>
-                <li>Wired a local LLM pipeline for consistent business-level docs.</li>
-              </ul>
-            </li>
-
-            <li class="timeline-item">
-              <div class="timeline-head">
-                <h3>Research Engineer · SCI Institute, U of U</h3>
-                <span class="date">Aug 2024 – Dec 2025</span>
-              </div>
-              <ul class="ascii-list">
-                <li>Built D3 / SvelteKit dashboards for computer-architecture experiments.</li>
-                <li>Cut analysis turnaround 80% and lifted render throughput 20%.</li>
-              </ul>
-            </li>
-
-            <li class="timeline-item">
-              <div class="timeline-head">
-                <h3>Fullstack Intern · InCaria</h3>
-                <span class="date">Jan – May 2025</span>
-              </div>
-              <ul class="ascii-list">
-                <li>Shipped React Native + TS flows worth ~20% of MVP completion.</li>
-                <li>Wired the app to a Django + Postgres backend over REST.</li>
-              </ul>
-            </li>
-
-            <li class="timeline-item">
-              <div class="timeline-head">
-                <h3>SWE Intern · SENTECHS</h3>
-                <span class="date">Jun – Aug 2024</span>
-              </div>
-              <ul class="ascii-list">
-                <li>API-driven IELTS passage analysis tool, MongoDB vocab pipeline feeding an LLM workflow.</li>
-                <li>REST endpoints handling 2,000+ daily queries.</li>
-              </ul>
-            </li>
-          </ol>
-        </section>
-
-        <section class="panel reveal" id="stack">
-          <div class="section-head">
-            <p class="prompt">$ stack --list</p>
-            <h2>stack</h2>
-          </div>
-
-          <dl class="stack-rows">
-            <div class="stack-row">
-              <dt>lang</dt>
-              <dd>java · ts · python · c# · c++ · kotlin</dd>
+          <section class="panel reveal" id="stack">
+            <div class="section-head">
+              <p class="prompt">$ stack --list</p>
+              <h2>stack</h2>
             </div>
-            <div class="stack-row">
-              <dt>front</dt>
-              <dd>react · react native · sveltekit · d3 · blazor</dd>
+            <dl class="stack-rows">
+              <div class="stack-row">
+                <dt>lang</dt>
+                <dd>java · ts · python · c# · c++ · kotlin</dd>
+              </div>
+              <div class="stack-row">
+                <dt>front</dt>
+                <dd>react · react native · sveltekit · d3 · blazor</dd>
+              </div>
+              <div class="stack-row">
+                <dt>back</dt>
+                <dd>node · django · spring · postgres · mongo · sqlite · supabase</dd>
+              </div>
+              <div class="stack-row">
+                <dt>tools</dt>
+                <dd>git · docker · aws (sagemaker, bedrock, ec2) · qt · pytest</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="panel reveal" id="contact">
+            <div class="section-head">
+              <p class="prompt">$ ./reach-out.sh</p>
+              <h2>contact</h2>
             </div>
-            <div class="stack-row">
-              <dt>back</dt>
-              <dd>node · django · spring · postgres · mongo · sqlite · supabase</dd>
+            <p class="lead">Open to engineering roles and interesting collabs.</p>
+            <div class="contact-list">
+              <a href="mailto:nolanmai1811@gmail.com">mail · nolanmai1811@gmail.com</a>
+              <a href="https://www.linkedin.com/in/nolanmai/" target="_blank" rel="noreferrer">linkedin · /in/nolanmai</a>
+              <a href="https://github.com/PotBorger" target="_blank" rel="noreferrer">github · /PotBorger</a>
+              <a href="files/NOLAN MAI Resume.pdf" target="_blank" rel="noreferrer">resume · pdf</a>
             </div>
-            <div class="stack-row">
-              <dt>tools</dt>
-              <dd>git · docker · aws (sagemaker, bedrock, ec2) · qt · pytest</dd>
-            </div>
-          </dl>
-        </section>
+          </section>
+        </main>
 
-        <section class="panel reveal" id="contact">
-          <div class="section-head">
-            <p class="prompt">$ ./reach-out.sh</p>
-            <h2>contact</h2>
-          </div>
-
-          <p class="lead">Open to engineering roles and interesting collabs.</p>
-
-          <div class="contact-list">
-            <a href="mailto:nolanmai1811@gmail.com">mail · nolanmai1811@gmail.com</a>
-            <a
-              href="https://www.linkedin.com/in/nolanmai/"
-              target="_blank"
-              rel="noreferrer"
-              >linkedin · /in/nolanmai</a
-            >
-            <a
-              href="https://github.com/PotBorger"
-              target="_blank"
-              rel="noreferrer"
-              >github · /PotBorger</a
-            >
-            <a
-              href="files/NOLAN MAI Resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              >resume · pdf</a
-            >
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p>
-          plain html · css · js · <span id="year"></span>
-        </p>
-      </footer>
+        <footer class="footer">
+          <p>three.js · vite · html · css · <span id="year"></span></p>
+        </footer>
+      </div>
     </div>
   </body>
 </html>
